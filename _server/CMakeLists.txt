@@ -10,4 +10,7 @@ target_link_libraries(Server PRIVATE ${Boost_LIBRARIES} ws2_32)
 
 
 
-# set(NETWORKING)
+set(NETWORKING 
+    ${CMAKE_CURRENT_SOURCE_DIR}/network/HttpServer.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/network/ThreadPool.cpp
+)
