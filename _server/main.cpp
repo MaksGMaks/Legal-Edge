@@ -3,8 +3,13 @@
 
 int main()
 {
-    HttpServer server;
+    const std::string addr{"127.0.0.1"};
+
+    const unsigned short int port = 8080;
+    HttpServer server(addr, port);
+    std::cout << "after exemple of class" << std::endl;
+    // server.run();
     // listen
-    server.test();
+    // server.test();
     std::cout << "Hello, world" << std::endl;
 }
