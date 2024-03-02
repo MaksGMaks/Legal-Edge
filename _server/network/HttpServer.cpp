@@ -35,15 +35,19 @@ void HttpServer::do_accept()
     std::cout << "connecting" << std::endl;
 
     // idk, but this connection doesent work at 2nd connection from client
-    //  m_thrpool->enqueue([this, sock]
-    //                     { on_accept(std::move(m_ec), std::move(sock)); });
-    on_accept(std::move(m_ec), std::move(m_sock));
+    m_thrpool->enqueue([this]
+                       { on_accept(std::move(m_ec), std::move(m_sock)); });
+    // on_accept(std::move(m_ec), std::move(m_sock));ss
+
+    std::cout << "after calling method on_accept into threadpool, id -- " << std::this_thread::get_id() << std::endl;
+    do_accept();
 }
 
 void HttpServer::on_accept(boost::system::error_code ec, boost::shared_ptr<net::ip::tcp::socket> sock)
 {
-    std::cout << "heard " << std::endl;
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    std::cout << "heard, id -- " << std::this_thread::get_id() << std::endl;
 
     // start transaction))
-    do_accept();
+    // do_accept();
 }
