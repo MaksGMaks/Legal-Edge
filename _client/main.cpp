@@ -17,8 +17,10 @@ int main()
     }
     std::array<char, 1024> buffer;
     boost::system::error_code ec;
-    size_t bytesread = sock.read_some(a::buffer(buffer), ec);
-    std::cout << std::string(buffer.data(), bytesread) << std::endl;
+    // size_t bytesread = sock.read_some(a::buffer(buffer), ec);
+    // std::cout << std::string(buffer.data(), bytesread) << std::endl;
+    std::string hellomessage = {"Hello from client!!!"};
+    write(sock, a::buffer(hellomessage + "\n"), ec);
     std::this_thread::sleep_for(std::chrono::seconds(5));
     sock.close();
     if (!sock.is_open())
