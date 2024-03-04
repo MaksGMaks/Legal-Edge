@@ -54,11 +54,16 @@ void HttpServer::on_accept(boost::system::error_code ec, boost::shared_ptr<net::
     std::cout << "heard, id -- " << std::this_thread::get_id() << std::endl;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     // start transaction))
     // do_accept();
     == == == =
                  auto t = std::make_shared<HttpTransaction>(std::move(sock));
 
+=======
+    auto t = std::make_shared<HttpTransaction>(std::move(sock));
+    t->start();
+>>>>>>> 50f1667 (reading message from client)
     // start transaction))
 >>>>>>> 1c490be (constructor transaction was called)
 }
