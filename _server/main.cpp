@@ -21,9 +21,8 @@ int main()
                     server.run(); });
     std::cout << "after exemple of class" << std::endl;
     std::string addr = "127.0.0.1";
-    HttpServer server(addr, 8080);
-    // listen
-    // server.test();
+    auto server = std::make_unique<HttpServer>(addr, 8080);
+    server->run();
     std::cout << "Hello, world" << std::endl;
     t1.join();
     return 0;
