@@ -2,6 +2,8 @@
 #include <boost/beast.hpp>
 #include <boost/thread.hpp>
 
+#include <vector>
+
 namespace http = boost::beast::http;
 
 class HttpTransaction
@@ -16,6 +18,7 @@ private:
     void do_response();
     void handle_request();
     void do_close();
+    std::vector<std::string> parseApi(const std::string Api);
 
 private:
     boost::beast::tcp_stream m_stream;

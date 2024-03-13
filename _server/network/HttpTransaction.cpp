@@ -1,5 +1,7 @@
 #include <iostream>
+#include <algorithm>
 
+#include <boost/algorithm/string.hpp>
 #include "HttpTransaction.hpp"
 
 namespace net = boost::asio;
@@ -29,6 +31,7 @@ void HttpTransaction::do_read()
 
 void HttpTransaction::handle_request()
 {
+
     do_response();
 }
 
@@ -47,4 +50,15 @@ void HttpTransaction::do_response()
     //     .insert(m_response.body().end(), content.begin(), content.end());
 
     http::write(m_stream, m_response);
+}
+
+std::vector<std::string> HttpTransaction::parseApi(const std::string endpoint)
+{
+    std::vector<std::string> segments;
+    boost::split(segments, endpoint, boost::is_any_of("/"), boost::token_compress_on);
+    segments.erase(std::remove_if(segments.begin(), segments.end(), [](const std::string &s)
+                                  { return s.empty(); }),
+                   segments.end());
+
+    return segments;
 }
