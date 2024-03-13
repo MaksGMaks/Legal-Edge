@@ -1,17 +1,20 @@
-# CMakeLists.txt в подкаталоге _client
 project(client)
 
-find_package(Boost REQUIRED COMPONENTS system)
-include_directories(${Boost_INCLUDE_DIRS})
-
+# Locate Qt packages
+find_package(Qt6 REQUIRED COMPONENTS Core Widgets Gui Network)
+find_package(Boost REQUIRED)
 add_executable(client main.cpp)
 
-target_link_libraries(client PRIVATE ${Boost_LIBRARIES})
+# Link libraries 
+target_link_libraries(client 
+    PUBLIC
+    Boost::system
+    $<$<PLATFORM_ID:Windows>:Ws2_32>
+    $<$<PLATFORM_ID:Windows>:Wsock32>
+    Qt6::Core 
+    Qt6::Widgets 
+    Qt6::Gui 
+    Qt6::Network
+)
 
-# Вместо "Boost::asio" используйте "Boost::system"
-target_link_libraries(client PRIVATE Boost::system)
 
-# Если используются библиотеки Windows Sockets, добавьте следующую строку
-target_link_libraries(client PRIVATE ws2_32)
-
-# target_link_libraries(client PRIVATE ${CONAN_LIBS})

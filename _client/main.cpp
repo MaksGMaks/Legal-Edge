@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include <QNetworkAccessManager>
+
 #include <chrono>
 #include <thread>
 #include <boost/asio.hpp>
@@ -7,6 +9,8 @@
 
 namespace a = boost::asio;
 namespace http = boost::beast::http;
+
+const std::string SERVER_API_URL{"http://127.0.0.1:8001/api"};
 
 int main()
 {
