@@ -1,52 +1,53 @@
 #include "HttpServer.hpp"
-
-#include <boost/asio.hpp>
-#include <boost/thread.hpp>
+#include <winsock2.h>
+#include <ws2tcpip.h>
 
 #include <chrono>
-#include <thread>
 #include <string>
-#include <iostream>
 
-namespace net = boost::asio;
+#define MAX_THREADS (std::thread::hardware_concurrency()) * 2
 
-void client_session(boost::shared_ptr<net::ip::tcp::socket> sock_ptr);
-
-void HttpServer::test()
+HttpServer::HttpServer(std::string addr, unsigned short port) : m_ioc{1},
+                                                                m_acc{m_ioc, net::ip::tcp::endpoint(net::ip::make_address(addr), static_cast<net::ip::port_type>(port))},
+                                                                m_thrpool{std::make_unique<ThreadPool>(MAX_THREADS)}
 {
-    typedef boost::shared_ptr<net::ip::tcp::socket> sock_ptr;
-    net::io_context ioc{};
-    net::ip::tcp::endpoint ep(net::ip::tcp::v4(), 8080);
-    net::ip::tcp::acceptor acc(ioc, ep);
-
-    while (1)
+    std::cout << "constructor HttpSession" << std::endl;
+    try
     {
-        std::cout << "listen, maybe" << std::endl;
-        sock_ptr sock(new net::ip::tcp::socket(ioc));
-        acc.accept(*sock);
-        boost::thread(boost::bind(client_session, sock));
+        do_accept();
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << e.what() << '\n';
     }
 }
 
-void client_session(boost::shared_ptr<net::ip::tcp::socket> sock_ptr)
+void HttpServer::run()
 {
-    while (1)
-    {
-        std::cout << "maybe connect" << std::endl;
-        std::string str;
-        str.reserve(512);
-        size_t len = sock_ptr->read_some(net::buffer(str));
-        write(*sock_ptr, net::buffer("ok", 2));
-        std::this_thread::sleep_for(std::chrono::seconds(5));
-        try
-        {
-            std::cout << "tryin to close connection" << std::endl;
-            sock_ptr->close();
-        }
-        catch (std::exception &ex)
-        {
-            std::cout << "exeption" << ex.what() << std::endl;
-        }
-        break;
-    }
+    m_ioc.run();
+}
+
+void HttpServer::do_accept()
+{
+    std::cout << "listen ..." << std::endl;
+    m_sock = boost::make_shared<net::ip::tcp::socket>(m_ioc);
+    m_acc.accept(*m_sock);
+    std::cout << "connecting" << std::endl;
+
+    // idk, but this connection doesent work at 2nd connection from client
+    m_thrpool->enqueue([this]
+                       { on_accept(std::move(m_ec), std::move(m_sock)); });
+    // on_accept(std::move(m_ec), std::move(m_sock));ss
+
+    std::cout << "after calling method on_accept into threadpool, id -- " << std::this_thread::get_id() << std::endl;
+    do_accept();
+}
+
+void HttpServer::on_accept(boost::system::error_code ec, boost::shared_ptr<net::ip::tcp::socket> sock)
+{
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    std::cout << "heard, id -- " << std::this_thread::get_id() << std::endl;
+
+    // start transaction))
+    // do_accept();
 }
