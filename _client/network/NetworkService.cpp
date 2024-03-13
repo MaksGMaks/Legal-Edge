@@ -44,8 +44,12 @@ void NetworkService::sendRequest(QString endpoint, const Method &method, const D
     if (reply != nullptr)
     {
         qDebug() << "vrodi tuta";
+<<<<<<< HEAD
         connect(reply, &QNetworkReply::finished, this, [this, endpoint = std::move(endpoint), method, reply]
                 { this->onNetworkReply(endpoint, method, reply); });
+=======
+        connect(reply, &QNetworkReply::finished, this, &NetworkService::onNetworkReply);
+>>>>>>> 8fe4822 (network worked correctly (#3))
     }
     else
     {
@@ -58,6 +62,7 @@ void NetworkService::setApiUrl(const QString &api)
     m_apiUrl = api;
 }
 
+<<<<<<< HEAD
 void NetworkService::onNetworkReply(const QString &endpoint, const Method &method, QNetworkReply *reply)
 {
     if (reply->error() == QNetworkReply::NoError)
@@ -68,4 +73,9 @@ void NetworkService::onNetworkReply(const QString &endpoint, const Method &metho
     {
         qDebug() << "Error - " << reply->error();
     }
+=======
+void NetworkService::onNetworkReply()
+{
+    qDebug() << "tuta";
+>>>>>>> 8fe4822 (network worked correctly (#3))
 }
