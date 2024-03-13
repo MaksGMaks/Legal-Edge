@@ -13,9 +13,6 @@ void NetworkService::sendRequest(QString endpoint, const Method &method, const D
     qDebug() << "url";
     QUrl fulUrl = m_apiUrl + "/" + id;
     QNetworkRequest request(fulUrl);
-    // request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    // request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::ManualRedirectPolicy);
-
     qDebug() << "reply";
     QNetworkReply *reply = nullptr;
     /*serialize data*/

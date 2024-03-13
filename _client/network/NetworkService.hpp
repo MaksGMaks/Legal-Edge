@@ -1,14 +1,10 @@
 #pragma once
 
 #include <QNetworkAccessManager>
-
 #include <QObject>
-#include <QHash>
-#include <QStringList>
 #include <QNetworkReply>
 
-using Data = QStringList;
-using Dataset = QMap<QString, Data>;
+#include "../dataTypes.hpp"
 
 enum class Method
 {
