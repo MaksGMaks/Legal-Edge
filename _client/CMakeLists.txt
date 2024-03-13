@@ -3,10 +3,19 @@ project(client)
 # Locate Qt packages
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets Gui Network)
 find_package(Boost REQUIRED)
-add_executable(client main.cpp)
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
+
+set(NETWORKING 
+    ${CMAKE_CURRENT_SOURCE_DIR}/network/NetworkService.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp)
+
+add_executable(${PROJECT_NAME} ${NETWORKING})
 
 # Link libraries 
-target_link_libraries(client 
+target_link_libraries(${PROJECT_NAME} 
     PUBLIC
     Boost::system
     $<$<PLATFORM_ID:Windows>:Ws2_32>
@@ -16,5 +25,6 @@ target_link_libraries(client
     Qt6::Gui 
     Qt6::Network
 )
+
 
 
