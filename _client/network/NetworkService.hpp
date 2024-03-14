@@ -3,12 +3,9 @@
 #include <QNetworkAccessManager>
 
 #include <QObject>
-#include <QHash>
-#include <QStringList>
 #include <QNetworkReply>
 
-using Data = QStringList;
-using Dataset = QMap<QString, Data>;
+#include "../dataTypes.hpp"
 
 enum class Method
 {
@@ -33,7 +30,7 @@ public:
     void setApiUrl(const QString &api);
 
 private slots:
-    void onNetworkReply();
+    void onNetworkReply(const QString &endpoint, const Method &method, QNetworkReply *reply);
 
 private:
     QNetworkAccessManager *m_manager;

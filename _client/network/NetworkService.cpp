@@ -1,5 +1,7 @@
 #include "NetworkService.hpp"
 
+#include "../Endpoints.hpp"
+
 #include <qDebug>
 #include <QByteArray>
 
@@ -13,13 +15,11 @@ void NetworkService::sendRequest(QString endpoint, const Method &method, const D
     qDebug() << "url";
     QUrl fulUrl = m_apiUrl + "/" + id;
     QNetworkRequest request(fulUrl);
-    // request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    // request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::ManualRedirectPolicy);
 
     qDebug() << "reply";
     QNetworkReply *reply = nullptr;
     /*serialize data*/
-    QString str = dataset["data"][0];
+    QString str = dataset[Keys::User::USERNAME][0] + " " + dataset[Keys::User::PASSWORD][0];
     QByteArray byteArr = str.toUtf8();
     qDebug() << "swich";
     switch (method)
@@ -44,7 +44,8 @@ void NetworkService::sendRequest(QString endpoint, const Method &method, const D
     if (reply != nullptr)
     {
         qDebug() << "vrodi tuta";
-        connect(reply, &QNetworkReply::finished, this, &NetworkService::onNetworkReply);
+        connect(reply, &QNetworkReply::finished, this, [this, endpoint = std::move(endpoint), method, reply]
+                { this->onNetworkReply(endpoint, method, reply); });
     }
     else
     {
@@ -57,7 +58,7 @@ void NetworkService::setApiUrl(const QString &api)
     m_apiUrl = api;
 }
 
-void NetworkService::onNetworkReply()
+void NetworkService::onNetworkReply(const QString &endpoint, const Method &method, QNetworkReply *reply)
 {
     qDebug() << "tuta";
 }
