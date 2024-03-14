@@ -5,7 +5,7 @@
 // #include <QNetworkRequest>
 // #include <QNetworkReply>
 // #include <QDebug>
-#include "network/NetworkService.hpp"
+#include "network/ApiManager.hpp"
 
 #include <chrono>
 #include <thread>
@@ -22,8 +22,7 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
     NetworkService network(nullptr);
     network.setApiUrl(SERVER_API_URL);
-    Dataset dataset;
-    dataset["data"] = {"Test Network with QNETWORKACCESSMANAGER"};
-    network.sendRequest("", Method::POST, dataset);
+    ApiManager api(network);
+    api.loginUser("admin", "1234234");
     return a.exec();
 }
