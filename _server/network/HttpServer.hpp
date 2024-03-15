@@ -1,5 +1,8 @@
 #pragma once
-#include "ThreadPool.cpp"
+
+#include "ThreadPool.hpp"
+#include "HttpTransaction.hpp"
+
 #include <boost/asio.hpp>
 #include <boost/thread.hpp>
 #include <iostream>

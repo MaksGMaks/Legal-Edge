@@ -1,5 +1,4 @@
 #include "HttpServer.hpp"
-#include "HttpTransaction.cpp"
 
 #include <winsock2.h>
 #include <ws2tcpip.h>
