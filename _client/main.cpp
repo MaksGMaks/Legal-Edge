@@ -1,29 +1,20 @@
 #include <iostream>
 
-#include <chrono>
-#include <thread>
-#include <boost/asio.hpp>
+#include <QCoreApplication>
+// #include <QNetworkAccessManager>
+// #include <QNetworkRequest>
+// #include <QNetworkReply>
+// #include <QDebug>
+#include "network/ApiManager.hpp"
 
-namespace a = boost::asio;
-int main()
+const QString SERVER_API_URL{"http://127.0.0.1:8080/api"};
+
+int main(int argc, char *argv[])
 {
-    a::io_context con{};
-    a::ip::tcp::endpoint ep(a::ip::address::from_string("127.0.0.1"), 8080);
-    a::ip::tcp::socket sock(con);
-    sock.connect(ep);
-    if (sock.is_open())
-    {
-        std::cout << "We are conect" << std::endl;
-    }
-    std::array<char, 1024> buffer;
-    boost::system::error_code ec;
-    // size_t bytesread = sock.read_some(a::buffer(buffer), ec);
-    // std::cout << std::string(buffer.data(), bytesread) << std::endl;
-    std::this_thread::sleep_for(std::chrono::seconds(7));
-    sock.close();
-    if (!sock.is_open())
-    {
-        std::cout << "We are disconected" << std::endl;
-    }
-    std::cout << "Hello, world! (client)" << std::endl;
+    QCoreApplication a(argc, argv);
+    NetworkService network(nullptr);
+    network.setApiUrl(SERVER_API_URL);
+    ApiManager api(network);
+    api.loginUser("admin", "1234234");
+    return a.exec();
 }

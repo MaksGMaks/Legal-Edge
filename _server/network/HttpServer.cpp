@@ -1,4 +1,5 @@
 #include "HttpServer.hpp"
+
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
@@ -37,9 +38,12 @@ void HttpServer::do_accept()
     // idk, but this connection doesent work at 2nd connection from client
     m_thrpool->enqueue([this]
                        { on_accept(std::move(m_ec), std::move(m_sock)); });
+<<<<<<< HEAD
     // on_accept(std::move(m_ec), std::move(m_sock));ss
 
-    std::cout << "after calling method on_accept into threadpool, id -- " << std::this_thread::get_id() << std::endl;
+    == == == =
+>>>>>>> 1c490be (constructor transaction was called)
+                 std::cout << "after calling method on_accept into threadpool, id -- " << std::this_thread::get_id() << std::endl;
     do_accept();
 }
 
@@ -48,6 +52,17 @@ void HttpServer::on_accept(boost::system::error_code ec, boost::shared_ptr<net::
     std::this_thread::sleep_for(std::chrono::seconds(2));
     std::cout << "heard, id -- " << std::this_thread::get_id() << std::endl;
 
+<<<<<<< HEAD
+<<<<<<< HEAD
     // start transaction))
     // do_accept();
+    == == == =
+                 auto t = std::make_shared<HttpTransaction>(std::move(sock));
+
+=======
+    auto t = std::make_shared<HttpTransaction>(std::move(sock));
+    t->start();
+>>>>>>> 50f1667 (reading message from client)
+    // start transaction))
+>>>>>>> 1c490be (constructor transaction was called)
 }
