@@ -10,14 +10,10 @@ set(CMAKE_AUTORCC ON)
 
 set(NETWORKING 
     ${CMAKE_CURRENT_SOURCE_DIR}/network/NetworkService.cpp
-<<<<<<< HEAD
     ${CMAKE_CURRENT_SOURCE_DIR}/network/ApiManager.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/dataTypes.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
     )
-=======
-    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp)
->>>>>>> 8fe4822 (network worked correctly (#3))
 
 add_executable(${PROJECT_NAME} ${NETWORKING})
 
