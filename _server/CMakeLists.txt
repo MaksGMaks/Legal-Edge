@@ -1,16 +1,31 @@
 cmake_minimum_required(VERSION 3.12)
 project(Server)
 
-find_package(Boost REQUIRED COMPONENTS system)
-include_directories(${Boost_INCLUDE_DIRS})
+find_package(Boost REQUIRED)
 
-add_executable(Server main.cpp)
+# include_directories(${Boost_INCLUDE_DIRS})
+# Link libs
 
-target_link_libraries(Server PRIVATE ${Boost_LIBRARIES} ws2_32)
+
+set(NETWORKING 
+    ${CMAKE_CURRENT_SOURCE_DIR}/network/HttpTransaction.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/network/ThreadPool.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp)
+
+add_executable(${PROJECT_NAME} ${NETWORKING})
+
+target_link_libraries(
+    ${PROJECT_NAME}
+    PRIVATE
+    boost::boost
+    $<$<PLATFORM_ID:Windows>:Ws2_32>
+    $<$<PLATFORM_ID:Windows>:Wsock32>
+)
+# target_link_libraries(Server PRIVATE ${Boost_LIBRARIES} ws2_32)
 # target_link_libraries(Server PRIVATE ${CONAN_LIBS})
 
 # target_link_libraries(Server PRIVATE ${Boost_LIBRARIES} ws2_32)
 
-set(NETWORKING ${CMAKE_CURRENT_SOURCE_DIR}/network/HttpServer.cpp)
+
 
 # set(NETWORKING)

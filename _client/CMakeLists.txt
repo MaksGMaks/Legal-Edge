@@ -10,14 +10,16 @@ set(CMAKE_AUTORCC ON)
 
 set(NETWORKING 
     ${CMAKE_CURRENT_SOURCE_DIR}/network/NetworkService.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp)
+    ${CMAKE_CURRENT_SOURCE_DIR}/network/ApiManager.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/dataTypes.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+    )
 
 add_executable(${PROJECT_NAME} ${NETWORKING})
 
 # Link libraries 
 target_link_libraries(${PROJECT_NAME} 
     PUBLIC
-    Boost::system
     $<$<PLATFORM_ID:Windows>:Ws2_32>
     $<$<PLATFORM_ID:Windows>:Wsock32>
     Qt6::Core 
