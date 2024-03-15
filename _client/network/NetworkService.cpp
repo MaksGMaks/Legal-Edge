@@ -60,5 +60,12 @@ void NetworkService::setApiUrl(const QString &api)
 
 void NetworkService::onNetworkReply(const QString &endpoint, const Method &method, QNetworkReply *reply)
 {
-    qDebug() << "tuta";
+    if (reply->error() == QNetworkReply::NoError)
+    {
+        qDebug() << "tuta";
+    }
+    else
+    {
+        qDebug() << "Error - " << reply->error();
+    }
 }

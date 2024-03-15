@@ -20,7 +20,6 @@ add_executable(${PROJECT_NAME} ${NETWORKING})
 # Link libraries 
 target_link_libraries(${PROJECT_NAME} 
     PUBLIC
-    Boost::system
     $<$<PLATFORM_ID:Windows>:Ws2_32>
     $<$<PLATFORM_ID:Windows>:Wsock32>
     Qt6::Core 
