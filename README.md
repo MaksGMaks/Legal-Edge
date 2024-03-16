@@ -1,4 +1,7 @@
+# LawyerHelp
+
 ### Installation
+
 1. Clone the repo
 
    ```
@@ -6,10 +9,11 @@
    ```
 
 2. Install prerequisites
+
    ```
    conan install . --output-folder=build --build=missing
    ```
- 
+
 3. Go to build folder and run cmake with presets
 
    ```

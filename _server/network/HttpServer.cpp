@@ -1,5 +1,4 @@
 #include "HttpServer.hpp"
-#include "HttpTransaction.cpp"
 
 #include <winsock2.h>
 #include <ws2tcpip.h>
@@ -47,8 +46,6 @@ void HttpServer::on_accept(boost::system::error_code ec, boost::shared_ptr<net::
 {
     std::this_thread::sleep_for(std::chrono::seconds(2));
     std::cout << "heard, id -- " << std::this_thread::get_id() << std::endl;
-
     auto t = std::make_shared<HttpTransaction>(std::move(sock));
     t->start();
-    // start transaction))
 }

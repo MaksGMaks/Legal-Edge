@@ -10,4 +10,3 @@ class Example(ConanFile):
         "sqlite3/*:threadsafe": 2
     }
     requires = [("boost/1.82.0")]
-    
