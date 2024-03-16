@@ -11,6 +11,7 @@ set(CMAKE_AUTORCC ON)
 set(NETWORKING 
     ${CMAKE_CURRENT_SOURCE_DIR}/network/NetworkService.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/network/ApiManager.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/network/JsonSerializer.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/dataTypes.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
     )

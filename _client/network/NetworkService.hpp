@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QNetworkReply>
 
+#include "IDataSerializer.hpp"
 #include "../dataTypes.hpp"
 
 enum class Method
@@ -29,10 +30,14 @@ public:
 
     void setApiUrl(const QString &api);
 
+    void setSerializer(std::unique_ptr<IDataSerializer> serializer);
+
 private slots:
     void onNetworkReply(const QString &endpoint, const Method &method, QNetworkReply *reply);
 
 private:
     QNetworkAccessManager *m_manager;
     QString m_apiUrl;
+
+    std::unique_ptr<IDataSerializer> m_serializer;
 };
