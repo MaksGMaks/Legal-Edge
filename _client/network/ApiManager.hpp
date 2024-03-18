@@ -23,6 +23,9 @@ public slots:
     virtual void loginUser(const QString &username, const QString &password);
     virtual void registerUser(const QString &username, const QString &password);
 
+    // protected slots:
+    //     void handleResponse(const QString &endpoint, Method &method, const Dataset &dataset);
+
 signals:
     void loginSuccess(const QString &id, const QString &roleId);
     void registrationSuccess();

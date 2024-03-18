@@ -60,8 +60,11 @@ void HttpTransaction::do_response()
 
     m_response.set(http::field::server, "MyServer");
     m_response.set(http::field::content_type, "text/plain");
-    m_response.set(http::field::content_length, std::to_string(content.size()));
-
+    // m_response.set(http::field::content_length, std::to_string(content.size()));
+    Dataset dataset;
+    dataset[Keys::User::USERNAME] = {"admin"};
+    auto dat = m_serializer->serialize(dataset);
+    boost::beast::ostream(m_response.body()) << dat;
     boost::beast::ostream(m_response.body()) << content;
     // m_response.body()
     //     .insert(m_response.body().end(), content.begin(), content.end());
