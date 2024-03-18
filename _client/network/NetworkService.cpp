@@ -58,14 +58,23 @@ void NetworkService::setApiUrl(const QString &api)
     m_apiUrl = api;
 }
 
+void NetworkService::setSerializer(std::unique_ptr<IDataSerializer> serializer)
+{
+    m_serializer = std::move(serializer);
+}
+
 void NetworkService::onNetworkReply(const QString &endpoint, const Method &method, QNetworkReply *reply)
 {
     if (reply->error() == QNetworkReply::NoError)
     {
         qDebug() << "tuta";
+        QByteArray data = reply->readAll();
+        auto dataset = m_serializer->deserialize(data);
+        qDebug() << dataset[Keys::User::USERNAME];
     }
     else
     {
         qDebug() << "Error - " << reply->error();
     }
+    reply->deleteLater();
 }

@@ -32,6 +32,9 @@ public:
 
     void setSerializer(std::unique_ptr<IDataSerializer> serializer);
 
+signals:
+    void responseReceived(const QString &endpoint, Method method, const Dataset &dataset);
+
 private slots:
     void onNetworkReply(const QString &endpoint, const Method &method, QNetworkReply *reply);
 

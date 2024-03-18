@@ -2,6 +2,8 @@
 ApiManager::ApiManager(NetworkService &networkService) : m_networkService(&networkService)
 {
     qDebug() << "ApiManager::ApiManager";
+    // connect(&m_networkService, &NetworkService::responseReceived,
+    //         this, &ApiManager::handleResponse);
 }
 
 ApiManager::~ApiManager()
