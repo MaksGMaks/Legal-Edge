@@ -3,7 +3,7 @@
 
 #include <boost/algorithm/string.hpp>
 
-#include <boost/algorithm/string.hpp>
+#include "../Business/BusienessLogic.hpp"
 #include "HttpTransaction.hpp"
 
 namespace net = boost::asio;
@@ -40,15 +40,54 @@ void HttpTransaction::do_read()
 void HttpTransaction::handle_request()
 {
     auto segments = parseApi(m_request.target());
-
-    auto data = m_serializer->deserialize(boost::beast::buffers_to_string(m_request.body().data()));
-    std::string d;
-    for (auto i : data[Keys::User::USERNAME])
+    // Check for valid
+    if (m_request.body().size() != 0)
     {
-        d = {i};
+        auto bodyStr = boost::beast::buffers_to_string(m_request.body().data());
+        std::cout << "[Transaction ID: {}] SERVER received data: {}" << bodyStr << std::endl;
     }
-    std::cout << "Message - ";
-    std::cout << d << std::endl;
+
+    // // Prepare RequestData
+    RequestData rd;
+    std::cout << "before if" << std::endl;
+    if (segments.size() >= 3)
+    {
+        std::cout << "after if" << std::endl;
+        auto dataset = m_serializer->deserialize(
+            boost::beast::buffers_to_string(m_request.body().data()));
+
+        rd = RequestData{
+            .module = segments[Endpoints::Segments::MODULE],
+            .submodule = segments[Endpoints::Segments::SUBMODULE],
+            .method = m_request.method_string(),
+            .resourceId = "",
+            .dataset = std::move(dataset)};
+
+        if (segments[Endpoints::Segments::ROOT] != "api")
+        {
+            std::cout << "[Transaction ID:  ] - HttpSession::handle_request error: Not an API request, expected /api endpoint" << std::endl;
+        }
+
+        // if we have resourceId
+        if (segments.size() > 3)
+        {
+            rd.resourceId = segments[Endpoints::Segments::RESOURCE_ID];
+        }
+    }
+    else
+    {
+        std::cout << "[Transaction ID: {}] - HttpSession::handle_request error: got invalid endpoint format" << std::endl;
+    }
+    auto bl = std::make_unique<BusinessLogic>();
+    bl->executeTask(rd);
+    // auto data = m_serializer->deserialize(boost::beast::buffers_to_string(m_request.body().data()));
+    // std::string d;
+    // for (auto i : data[Keys::User::USERNAME])
+    // {
+    //     d = {i};
+    // }
+    // std::cout << "Message - ";
+    // std::cout << d << std::endl;
     do_response();
 }
 
@@ -65,7 +104,7 @@ void HttpTransaction::do_response()
     dataset[Keys::User::USERNAME] = {"admin"};
     auto dat = m_serializer->serialize(dataset);
     boost::beast::ostream(m_response.body()) << dat;
-    boost::beast::ostream(m_response.body()) << content;
+    // boost::beast::ostream(m_response.body()) << content;
     // m_response.body()
     //     .insert(m_response.body().end(), content.begin(), content.end());
 
@@ -75,6 +114,7 @@ void HttpTransaction::do_response()
 std::vector<std::string> HttpTransaction::parseApi(const std::string endpoint)
 {
     std::vector<std::string> segments;
+    std::cout << "ENDPOINT -------> " << endpoint << std::endl;
     boost::split(segments, endpoint, boost::is_any_of("/"), boost::token_compress_on);
     segments.erase(std::remove_if(segments.begin(), segments.end(), [](const std::string &s)
                                   { return s.empty(); }),

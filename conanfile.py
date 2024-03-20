@@ -9,5 +9,4 @@ class Example(ConanFile):
         "boost/*:without_test": True,
         "sqlite3/*:threadsafe": 2
     }
-    requires = [("boost/1.82.0"), ("nlohmann_json/3.11.2")]
-    
+    requires = [("boost/1.82.0"), ("nlohmann_json/3.11.2"), ("sqlite3/3.45.1")]    
