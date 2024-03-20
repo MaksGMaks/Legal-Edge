@@ -86,7 +86,6 @@ void DatabaseManager::insertTest()
 {
     const char *sql = "INSERT INTO users(ID, USERNAME, PASSWORD) VALUES(1, 'admin', 'admin')";
 
-    // Выполняем SQL-запрос
     char *zErrMsg = 0;
 
     int rc = sqlite3_exec(db, sql, 0, 0, &zErrMsg);
@@ -106,7 +105,6 @@ void DatabaseManager::selectTest()
     std::cout << "select test" << std::endl;
     const char *sql = "SELECT * FROM users";
 
-    // Функция обратного вызова для обработки результатов запроса
     // auto callback = [](void *data, int argc, char **argv, char **azColName) -> int
     // {
     //     std::cout << "into callback" << std::endl;
@@ -120,7 +118,6 @@ void DatabaseManager::selectTest()
     // };
     char *zErrMsg = 0;
 
-    // Выполняем SELECT-запрос
     int rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
     if (rc != SQLITE_OK)
     {

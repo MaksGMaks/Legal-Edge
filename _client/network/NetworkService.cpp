@@ -15,7 +15,7 @@ void NetworkService::sendRequest(QString endpoint, const Method &method, const D
     {
         qDebug() << "m_serializer not set";
     }
-    QUrl fulUrl = m_apiUrl + "/" + id;
+    QUrl fulUrl = m_apiUrl + endpoint + "/" + id;
     QNetworkRequest request(fulUrl);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::ManualRedirectPolicy);

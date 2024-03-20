@@ -78,16 +78,16 @@ void HttpTransaction::handle_request()
     {
         std::cout << "[Transaction ID: {}] - HttpSession::handle_request error: got invalid endpoint format" << std::endl;
     }
-    // auto bl = std::make_unique<BusinessLogic>();
-    // bl->executeTask(rd);
-    auto data = m_serializer->deserialize(boost::beast::buffers_to_string(m_request.body().data()));
-    std::string d;
-    for (auto i : data[Keys::User::USERNAME])
-    {
-        d = {i};
-    }
-    std::cout << "Message - ";
-    std::cout << d << std::endl;
+    auto bl = std::make_unique<BusinessLogic>();
+    bl->executeTask(rd);
+    // auto data = m_serializer->deserialize(boost::beast::buffers_to_string(m_request.body().data()));
+    // std::string d;
+    // for (auto i : data[Keys::User::USERNAME])
+    // {
+    //     d = {i};
+    // }
+    // std::cout << "Message - ";
+    // std::cout << d << std::endl;
     do_response();
 }
 
@@ -114,6 +114,7 @@ void HttpTransaction::do_response()
 std::vector<std::string> HttpTransaction::parseApi(const std::string endpoint)
 {
     std::vector<std::string> segments;
+    std::cout << "ENDPOINT -------> " << endpoint << std::endl;
     boost::split(segments, endpoint, boost::is_any_of("/"), boost::token_compress_on);
     segments.erase(std::remove_if(segments.begin(), segments.end(), [](const std::string &s)
                                   { return s.empty(); }),
