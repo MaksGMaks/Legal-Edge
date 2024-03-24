@@ -132,6 +132,19 @@ std::vector<std::vector<std::string>> DatabaseManager::executeQuery(const std::s
     sqlite3_finalize(stmt);
     return result;
 }
+// dbResponse DatabaseManager::executeQuery(const std::string &query, const std::vector<std::string> &params)
+// {
+//     dbResponse response;
+//     sqlite3_stmt *stmt;
+//     int rc = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, nullptr);
+//     if (rc != SQLITE_OK)
+//     {
+//         std::cerr << "Ошибка подготовки запроса: " << sqlite3_errmsg(db) << std::endl;
+//         response.dataset[Keys::_ERROR].push_back("Error - " + std::string(sqlite3_errmsg(db)));
+//         response.contains = false;
+//         response.SQL_OK = 1;
+//         return response;
+//     }
 
 std::vector<std::vector<std::string>> DatabaseManager::executeQuery(const std::string &query)
 {
