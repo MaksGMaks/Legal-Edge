@@ -25,3 +25,10 @@ struct ResponseData
 {
     Dataset dataset;
 };
+
+struct dbResponse
+{
+    int SQL_OK;
+    bool contains = false;
+    Dataset dataset;
+};
