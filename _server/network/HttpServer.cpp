@@ -17,6 +17,8 @@ HttpServer::HttpServer(std::string addr,
                                                     dbScript{std::move(script)},
                                                     m_thrpool{std::make_unique<ThreadPool>(MAX_THREADS)}
 {
+    m_dbManager = std::make_shared<DatabaseManager>(dbPath, dbScript);
+    m_dbManager->start();
     std::cout << "constructor HttpSession" << std::endl;
     try
     {
@@ -54,7 +56,6 @@ void HttpServer::on_accept(boost::system::error_code ec, boost::shared_ptr<net::
 
     auto t = std::make_shared<HttpTransaction>(std::move(sock),
                                                std::make_unique<JsonSerializer>(),
-                                               std::move(dbPath),
-                                               std::move(dbScript));
+                                               std::move(m_dbManager));
     t->start();
 }

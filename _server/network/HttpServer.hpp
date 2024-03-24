@@ -21,6 +21,8 @@ private:
     const std::string dbPath;
     const std::string dbScript;
 
+    std::shared_ptr<DatabaseManager> m_dbManager;
+
 private:
     void do_accept();
 

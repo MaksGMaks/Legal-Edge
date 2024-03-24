@@ -18,5 +18,5 @@ private:
     ResponseData registerUser(const Dataset &dataset);
 
 private:
-    std::shared_ptr<IRepository<User>> m_userRepository;
+    std::shared_ptr<IRepository> m_userRepository;
 };

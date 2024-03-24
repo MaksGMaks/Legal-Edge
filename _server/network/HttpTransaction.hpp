@@ -18,8 +18,7 @@ class HttpTransaction
 public:
     HttpTransaction(boost::shared_ptr<boost::asio::ip::tcp::socket> sock,
                     std::unique_ptr<IDataSerializer> serializer,
-                    const std::string &dbPath,
-                    const std::string &script);
+                    std::shared_ptr<DatabaseManager> dbManager);
 
     void start();
 
@@ -42,7 +41,6 @@ private:
 
     std::unique_ptr<IDataSerializer> m_serializer;
 
-    std::shared_ptr<DatabaseManager> m_dbManager;
     std::shared_ptr<RepositoryManager> m_reposManager;
     std::shared_ptr<BusinessLogic> m_blm;
 };

@@ -9,14 +9,10 @@ namespace net = boost::asio;
 
 HttpTransaction::HttpTransaction(boost::shared_ptr<net::ip::tcp::socket> sock,
                                  std::unique_ptr<IDataSerializer> serializer,
-                                 const std::string &dbPath,
-                                 const std::string &script) : m_stream(std::move(*sock)),
-                                                              m_dbPath{std::move(dbPath)},
-                                                              m_scriptPath{std::move(script)},
-                                                              m_serializer(std::move(serializer))
+                                 std::shared_ptr<DatabaseManager> dbManager) : m_stream(std::move(*sock)),
+                                                                               m_reposManager{std::make_shared<RepositoryManager>(dbManager)},
+                                                                               m_serializer(std::move(serializer))
 {
-    m_dbManager = std::make_shared<DatabaseManager>(m_dbPath, m_scriptPath);
-    m_reposManager = std::make_shared<RepositoryManager>(m_dbManager);
     m_blm = std::make_shared<BusinessLogic>(m_reposManager);
     std::cout << "Constructor transaction" << std::endl;
 }
