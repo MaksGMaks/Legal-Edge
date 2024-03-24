@@ -57,10 +57,14 @@ void HttpServer::on_accept(boost::system::error_code ec, boost::shared_ptr<net::
     auto t = std::make_shared<HttpTransaction>(std::move(sock),
                                                std::make_unique<JsonSerializer>(),
 <<<<<<< HEAD
+<<<<<<< HEAD
                                                std::move(m_dbManager));
 =======
                                                std::move(dbPath),
                                                std::move(dbScript));
 >>>>>>> 04991a2 (implement database and connect it with modules and repos)
+=======
+                                               std::move(m_dbManager));
+>>>>>>> 44d4a42 (replacing template with strategy pattern)
     t->start();
 }

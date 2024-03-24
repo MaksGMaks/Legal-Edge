@@ -132,6 +132,47 @@ std::vector<std::vector<std::string>> DatabaseManager::executeQuery(const std::s
     sqlite3_finalize(stmt);
     return result;
 }
+
+std::vector<std::vector<std::string>> DatabaseManager::executeQuery(const std::string &query)
+{
+    sqlite3_stmt *stmt;
+    std::vector<std::vector<std::string>> result;
+
+    // Подготавливаем SQL запрос
+    int rc = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, nullptr);
+    if (rc != SQLITE_OK)
+    {
+        std::cerr << "Ошибка при подготовке SQL запроса: " << sqlite3_errmsg(db) << std::endl;
+        sqlite3_close(db);
+        return {};
+    }
+    // Выполняем запрос
+    while ((rc = sqlite3_step(stmt)) == SQLITE_ROW)
+    {
+        // Создаем временный вектор для хранения данных текущей строки результата
+        std::vector<std::string> row;
+
+        // Получаем и сохраняем значения столбцов текущей строки
+        for (int i = 0; i < sqlite3_column_count(stmt); ++i)
+        {
+            const unsigned char *value = sqlite3_column_text(stmt, i);
+            row.push_back(std::string(reinterpret_cast<const char *>(value)));
+        }
+
+        // Добавляем текущую строку в результат
+        result.push_back(row);
+    }
+
+    // Проверяем наличие ошибок при выполнении запроса
+    if (rc != SQLITE_DONE)
+    {
+        std::cerr << "Ошибка при выполнении запроса: " << sqlite3_errmsg(db) << std::endl;
+    }
+
+    // Освобождаем ресурсы
+    sqlite3_finalize(stmt);
+    return result;
+}
 // dbResponse DatabaseManager::executeQuery(const std::string &query, const std::vector<std::string> &params)
 // {
 //     dbResponse response;
