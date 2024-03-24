@@ -3,13 +3,21 @@
 
 #include <boost/algorithm/string.hpp>
 
-#include "../Business/BusienessLogic.hpp"
 #include "HttpTransaction.hpp"
 
 namespace net = boost::asio;
 
-HttpTransaction::HttpTransaction(boost::shared_ptr<net::ip::tcp::socket> sock, std::unique_ptr<IDataSerializer> serializer) : m_stream(std::move(*sock)), m_serializer(std::move(serializer))
+HttpTransaction::HttpTransaction(boost::shared_ptr<net::ip::tcp::socket> sock,
+                                 std::unique_ptr<IDataSerializer> serializer,
+                                 const std::string &dbPath,
+                                 const std::string &script) : m_stream(std::move(*sock)),
+                                                              m_dbPath{std::move(dbPath)},
+                                                              m_scriptPath{std::move(script)},
+                                                              m_serializer(std::move(serializer))
 {
+    m_dbManager = std::make_shared<DatabaseManager>(m_dbPath, m_scriptPath);
+    m_reposManager = std::make_shared<RepositoryManager>(m_dbManager);
+    m_blm = std::make_shared<BusinessLogic>(m_reposManager);
     std::cout << "Constructor transaction" << std::endl;
 }
 
@@ -78,8 +86,7 @@ void HttpTransaction::handle_request()
     {
         std::cout << "[Transaction ID: {}] - HttpSession::handle_request error: got invalid endpoint format" << std::endl;
     }
-    auto bl = std::make_unique<BusinessLogic>();
-    bl->executeTask(rd);
+    m_blm->executeTask(rd);
     // auto data = m_serializer->deserialize(boost::beast::buffers_to_string(m_request.body().data()));
     // std::string d;
     // for (auto i : data[Keys::User::USERNAME])

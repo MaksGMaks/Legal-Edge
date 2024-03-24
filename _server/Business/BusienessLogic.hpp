@@ -5,6 +5,7 @@
 
 #include "../dataTypes.hpp"
 #include "../Endpoints.hpp"
+#include "../Database/RepositoryManager.hpp"
 
 #include "UserModule.hpp"
 
@@ -14,10 +15,10 @@ class UserModule;
 class BusinessLogic
 {
 public:
-    BusinessLogic(/*RepositoryManager &repositoryManager*/);
+    BusinessLogic(const std::shared_ptr<RepositoryManager> &repositoryManager);
 
     void executeTask(RequestData requestData /*, BusinessLogicCallback callback*/);
 
 private:
-    std::unique_ptr<UserModule> m_usersModule;
+    std::shared_ptr<UserModule> m_usersModule;
 };

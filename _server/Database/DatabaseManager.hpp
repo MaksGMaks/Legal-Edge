@@ -3,6 +3,8 @@
 #include <iostream>
 #include <sqlite3.h>
 
+#include "../dataTypes.hpp"
+
 class DatabaseManager
 {
 private:
@@ -15,9 +17,10 @@ public:
     DatabaseManager(const std::string &path_to_db, const std::string &path_to_sql_script) noexcept;
     ~DatabaseManager();
 
-    void insertTest();
+    // dbResponse executeQuery(const std::string &query, const std::vector<std::string> &params);
+    std::vector<std::vector<std::string>> executeQuery(const std::string &query, const std::vector<std::string> &params);
 
-    void selectTest();
+    // void selectTest();
 
     void start();
 };
