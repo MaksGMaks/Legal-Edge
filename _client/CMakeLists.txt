@@ -13,6 +13,16 @@ include_directories(${Boost_INCLUDE_DIRS})
 set(UI_PATH "${CMAKE_CURRENT_SOURCE_DIR}/Ui")
 set(NET_PATH "${CMAKE_CURRENT_SOURCE_DIR}/network")
 
+include_directories(${Boost_INCLUDE_DIRS})
+
+set(UI_SOURCES
+    Ui\MainWindow.cpp
+    Ui\UiManager.cpp
+    Ui\MenuBar.cpp
+    Ui\Style.hpp)
+
+add_executable(client main.cpp)
+
 set(UI_SOURCES
     ${UI_PATH}/MainWindow.cpp
     ${UI_PATH}/UiManager.cpp

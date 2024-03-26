@@ -7,6 +7,7 @@
 #include <QString>
 
 #include <QDebug>
+#include <QStatusBar>
 
 #include "Style.hpp"
 
