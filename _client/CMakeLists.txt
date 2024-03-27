@@ -16,7 +16,15 @@ set(NET_PATH "${CMAKE_CURRENT_SOURCE_DIR}/network")
 set(UI_SOURCES
     ${UI_PATH}/MainWindow.cpp
     ${UI_PATH}/UiManager.cpp
+    ${UI_PATH}/MenuBar.cpp
     ${UI_PATH}/Style.hpp)
+
+set(ALL_SOURCES
+    ${UI_SOURCES}
+    ${CMAKE_CURRENT_SOURCE_DIR}/LegalEdgeClient.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp)
+
+add_executable(client ${ALL_SOURCES})
 
 set(NETWORKING 
     ${NET_PATH}/NetworkService.cpp

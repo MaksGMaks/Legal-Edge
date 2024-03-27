@@ -3,6 +3,8 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
     this->init();
+    m_stackView = new QStackedWidget(this);
+    this->showMaximized();
 }
 
 MainWindow::~MainWindow()

@@ -12,6 +12,8 @@
 #include <QThread>
 #include <thread>
 #include <chrono>
+#include "LegalEdgeClient.hpp"
+#include "Ui/UiManager.hpp"
 
 const QString SERVER_API_URL{"http://127.0.0.1:8080/api"};
 
@@ -69,4 +71,13 @@ int main(int argc, char *argv[])
     qDebug() << "attempt no 3";
     api.registerUser("dada", "dawda");
     return a.exec();
+
+
+    // Client setup
+    QApplication app(argc, argv);
+
+    UiManager uiManager(app);
+    LegalEdgeClient client(uiManager);
+
+    client.start();
 }
