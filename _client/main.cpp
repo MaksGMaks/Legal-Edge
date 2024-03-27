@@ -1,12 +1,25 @@
 #include <iostream>
 
+#include <QApplication>
+
 #include <chrono>
 #include <thread>
 #include <boost/asio.hpp>
 
+#include "LegalEdgeClient.hpp"
+#include "Ui/UiManager.hpp"
+
 namespace a = boost::asio;
-int main()
+int main(int argc, char *argv[])
 {
+    // Client setup
+    QApplication app(argc, argv);
+
+    UiManager uiManager(app);
+    LegalEdgeClient client(uiManager);
+
+    client.start();
+
     a::io_context con{};
     a::ip::tcp::endpoint ep(a::ip::address::from_string("127.0.0.1"), 8080);
     a::ip::tcp::socket sock(con);
@@ -26,4 +39,6 @@ int main()
         std::cout << "We are disconected" << std::endl;
     }
     std::cout << "Hello, world! (client)" << std::endl;
+
+    return app.exec();
 }

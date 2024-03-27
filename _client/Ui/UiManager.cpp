@@ -4,3 +4,7 @@ UiManager::UiManager(QApplication &app)
     : m_app(app)
 {
 }
+
+UiManager::~UiManager()
+{
+}
