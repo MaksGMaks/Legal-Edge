@@ -15,13 +15,21 @@ set(NET_PATH "${CMAKE_CURRENT_SOURCE_DIR}/network")
 
 include_directories(${Boost_INCLUDE_DIRS})
 
-set(UI_SOURCES
-    Ui\MainWindow.cpp
-    Ui\UiManager.cpp
-    Ui\MenuBar.cpp
-    Ui\Style.hpp)
+set(UI_PATH "${CMAKE_CURRENT_SOURCE_DIR}/Ui")
+set(NET_PATH "${CMAKE_CURRENT_SOURCE_DIR}/Network")
 
-add_executable(client main.cpp)
+set(UI_SOURCES
+    ${UI_PATH}/MainWindow.cpp
+    ${UI_PATH}/UiManager.cpp
+    ${UI_PATH}/MenuBar.cpp
+    ${UI_PATH}/Style.hpp)
+
+set(ALL_SOURCES
+    ${UI_SOURCES}
+    ${CMAKE_CURRENT_SOURCE_DIR}/LegalEdgeClient.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp)
+
+add_executable(client ${ALL_SOURCES})
 
 set(UI_SOURCES
     ${UI_PATH}/MainWindow.cpp

@@ -10,6 +10,9 @@
 #include "Ui/UiManager.hpp"
 // for test
 #include <QThread>
+#include <QApplication>
+
+#include <chrono>
 #include <thread>
 #include <chrono>
 #include "LegalEdgeClient.hpp"
@@ -25,12 +28,6 @@ private:
 
 public:
     MyThread()
-    {
-        network = new NetworkService(nullptr);
-        network->setApiUrl(SERVER_API_URL);
-        network->setSerializer(std::make_unique<JsonSerializer>());
-        api = new ApiManager(*network);
-    }
 
 public:
     void run() override
