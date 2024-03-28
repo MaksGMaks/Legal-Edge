@@ -13,6 +13,10 @@ include_directories(${Boost_INCLUDE_DIRS})
 set(UI_PATH "${CMAKE_CURRENT_SOURCE_DIR}/Ui")
 set(NET_PATH "${CMAKE_CURRENT_SOURCE_DIR}/network")
 
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
+
 include_directories(${Boost_INCLUDE_DIRS})
 
 set(UI_PATH "${CMAKE_CURRENT_SOURCE_DIR}/Ui")
@@ -21,7 +25,6 @@ set(NET_PATH "${CMAKE_CURRENT_SOURCE_DIR}/Network")
 set(UI_SOURCES
     ${UI_PATH}/MainWindow.cpp
     ${UI_PATH}/UiManager.cpp
-    ${UI_PATH}/MenuBar.cpp
     ${UI_PATH}/Style.hpp)
 
 set(ALL_SOURCES
