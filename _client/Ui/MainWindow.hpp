@@ -2,9 +2,11 @@
 
 #include <QMainWindow>
 #include <QStackedWidget>
-#include <QStatusBar>
 #include <QMenuBar>
 #include <QMenu>
+#include <QString>
+
+#include <QDebug>
 
 #include "Style.hpp"
 
@@ -27,4 +29,8 @@ private:
 
     // menu bar
     QMenuBar *m_mainMenuBar;
+
+    //functions
+    void pageHandler(int index);
+    QMenu* createMenu(const QString & text, int index);
 };
