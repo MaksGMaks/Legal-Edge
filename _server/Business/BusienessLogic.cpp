@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-BusinessLogic::BusinessLogic(/*RepositoryManager &repositoryManager*/) : m_usersModule(std::make_unique<UserModule>(/*repositoryManager*/))
+BusinessLogic::BusinessLogic(const std::shared_ptr<RepositoryManager> &repositoryManager) : m_usersModule(std::make_shared<UserModule>(repositoryManager))
 {
     std::cout << "BusinessLogic::BusinessLogic" << std::endl;
 }

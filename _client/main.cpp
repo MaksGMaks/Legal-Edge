@@ -13,6 +13,6 @@ int main(int argc, char *argv[])
     network.setApiUrl(SERVER_API_URL);
     network.setSerializer(std::make_unique<JsonSerializer>());
     ApiManager api(network);
-    api.loginUser("admin", "1234234");
+    api.loginUser("admin2", "admin2");
     return a.exec();
 }

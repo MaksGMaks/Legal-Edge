@@ -10,7 +10,9 @@ set(BUSINESS
     ${CMAKE_CURRENT_SOURCE_DIR}/Business/BusienessLogic.cpp)
 
 set(DATABASE
-    ${CMAKE_CURRENT_SOURCE_DIR}/Database/DatabaseManager.cpp)
+    ${CMAKE_CURRENT_SOURCE_DIR}/Database/DatabaseManager.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Database/RepositoryManager.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Database/UserRepository.cpp)
 
 
 set(NETWORKING 
@@ -23,7 +25,8 @@ set(SERVER
     ${NETWORKING}
     ${DATABASE}
     ${BUSINESS}
-    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp)
+    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Server.cpp)
 
 set(SERVER_BUILD_DIR "${CMAKE_BINARY_DIR}/_server")
 
