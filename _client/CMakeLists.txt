@@ -19,10 +19,10 @@ set(UI_SOURCES
     ${UI_PATH}/Style.hpp)
 
 set(NETWORKING 
-    ${NET_PATH}/network/NetworkService.cpp
-    ${NET_PATH}/network/ApiManager.cpp
-    ${NET_PATH}/network/JsonSerializer.cpp
-    ${NET_PATH}/dataTypes.hpp)
+    ${NET_PATH}/NetworkService.cpp
+    ${NET_PATH}/ApiManager.cpp
+    ${NET_PATH}/JsonSerializer.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/dataTypes.hpp)
 
 
 set(ALL_SOURCES

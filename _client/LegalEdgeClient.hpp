@@ -1,11 +1,12 @@
 #pragma once
 
 class UiManager;
+class ApiManager;
 
 class LegalEdgeClient
 {
 public:
-    LegalEdgeClient(UiManager &uiManager);
+    LegalEdgeClient(UiManager &uiManager, ApiManager &apiManager);
     ~LegalEdgeClient();
 
     void start();
@@ -13,4 +14,5 @@ public:
 private:
     // --- UI ---
     UiManager &m_uiManager;
+    ApiManager &m_apiManager;
 };

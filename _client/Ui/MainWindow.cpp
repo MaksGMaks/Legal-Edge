@@ -17,12 +17,22 @@ void MainWindow::init()
 
     QWidget * test = new QWidget(this);
     m_stackView->addWidget(test);
-    qDebug() << "MainWindow: add widget, index - " << m_stackView->currentWidget();
+    qDebug() << "MainWindow: add widget, index - " << m_stackView->currentIndex();
+    QWidget * test1 = new QWidget(this);
+    m_stackView->addWidget(test1);
+    m_stackView->setCurrentIndex(1);
+    qDebug() << "MainWindow: add widget, index - " << m_stackView->currentIndex();
     
     m_stackView->resize(this->size().width(), this->size().height());
 
     // Menu
-    QMenu * m_caseManagment = createMenu(tr("Управління справами"), 0);
+    // QMenu * m_caseManagment = createMenu(tr("Case Managment"), 0);
+    
+    // qDebug() << "MainWindow: add case managment";
+    // m_mainMenuBar->addMenu(m_caseManagment);
+
+    // qDebug() << "MainWindow: set menubar";
+    // this->setMenuBar(m_mainMenuBar);
 }
 
 void MainWindow::resizeEvent(QResizeEvent *)
@@ -40,6 +50,7 @@ void MainWindow::pageHandler(int index)
     default:
         break;
     }
+    qDebug() << "MainWindow: stackview index - " << m_stackView->currentIndex();
 }
 
 QMenu* MainWindow::createMenu(const QString & text, int index)
