@@ -10,8 +10,12 @@ class UiManager : public QObject
     Q_OBJECT
 
 public:
-    UiManager(QApplication &app);
+    explicit UiManager(QApplication &app) noexcept;
     virtual ~UiManager();
+
+    void setupUi();
+    void startUi();
+
 
 protected:
     QApplication &m_app;
