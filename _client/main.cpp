@@ -70,11 +70,17 @@ int main(int argc, char *argv[])
     return a.exec();
 
 
-    // Client setup
     QApplication app(argc, argv);
 
+    // Network setup
+    NetworkService network(nullptr);
+    network.setApiUrl(SERVER_API_URL);
+    network.setSerializer(std::make_unique<JsonSerializer>());
+    ApiManager apiManager(network);
+    
+    // Client setup
     UiManager uiManager(app);
-    LegalEdgeClient client(uiManager);
+    LegalEdgeClient client(uiManager, apiManager);
 
     client.start();
 }
