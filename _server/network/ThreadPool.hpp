@@ -5,6 +5,7 @@
 #include <queue>
 #include <mutex>
 #include <condition_variable>
+#include <unordered_map>
 
 class ThreadPool
 {

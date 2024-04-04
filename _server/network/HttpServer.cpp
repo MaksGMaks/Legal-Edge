@@ -56,6 +56,6 @@ void HttpServer::on_accept(boost::system::error_code ec, boost::shared_ptr<net::
 
     auto t = std::make_shared<HttpTransaction>(std::move(sock),
                                                std::make_unique<JsonSerializer>(),
-                                               std::move(m_dbManager));
+                                               m_dbManager);
     t->start();
 }

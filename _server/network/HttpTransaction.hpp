@@ -24,7 +24,7 @@ public:
 
 private:
     void do_read();
-    void do_response();
+    void do_response(const ResponseData &response);
     void handle_request();
     void do_close();
     std::vector<std::string> parseApi(const std::string Api);

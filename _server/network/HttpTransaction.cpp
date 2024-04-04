@@ -82,7 +82,16 @@ void HttpTransaction::handle_request()
     {
         std::cout << "[Transaction ID: {}] - HttpSession::handle_request error: got invalid endpoint format" << std::endl;
     }
-    m_blm->executeTask(rd);
+
+    ResponseData *resp;
+    auto callback = [resp](ResponseData response)
+    {
+        *resp = response;
+        return response;
+    };
+    auto response = m_blm->executeTask(rd);
+    std::cout << "ssssss" << std::endl;
+    // std::cout << resp->dataset.at(Keys::User::USERNAME).front();
     // auto data = m_serializer->deserialize(boost::beast::buffers_to_string(m_request.body().data()));
     // std::string d;
     // for (auto i : data[Keys::User::USERNAME])
@@ -91,10 +100,10 @@ void HttpTransaction::handle_request()
     // }
     // std::cout << "Message - ";
     // std::cout << d << std::endl;
-    do_response();
+    do_response(response);
 }
 
-void HttpTransaction::do_response()
+void HttpTransaction::do_response(const ResponseData &response)
 {
     std::string content{"Hello from server!!!"};
     m_response.result(http::status::ok);
