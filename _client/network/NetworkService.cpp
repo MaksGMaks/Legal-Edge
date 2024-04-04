@@ -4,6 +4,8 @@
 
 #include <qDebug>
 #include <QByteArray>
+#include <thread>
+#include <chrono>
 
 NetworkService::NetworkService(QObject *parent) : QObject(parent), m_manager(new QNetworkAccessManager(this))
 {

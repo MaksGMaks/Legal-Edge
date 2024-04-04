@@ -58,6 +58,7 @@ void HttpServer::on_accept(boost::system::error_code ec, boost::shared_ptr<net::
                                                std::make_unique<JsonSerializer>(),
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                                                std::move(m_dbManager));
 =======
                                                std::move(dbPath),
@@ -66,5 +67,8 @@ void HttpServer::on_accept(boost::system::error_code ec, boost::shared_ptr<net::
 =======
                                                std::move(m_dbManager));
 >>>>>>> 44d4a42 (replacing template with strategy pattern)
+=======
+                                               m_dbManager);
+>>>>>>> d439f05 (rewrite)
     t->start();
 }

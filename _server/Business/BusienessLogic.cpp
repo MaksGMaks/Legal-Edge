@@ -7,7 +7,7 @@ BusinessLogic::BusinessLogic(const std::shared_ptr<RepositoryManager> &repositor
     std::cout << "BusinessLogic::BusinessLogic" << std::endl;
 }
 
-void BusinessLogic::executeTask(RequestData requestData /*, BusinessLogicCallback callback*/)
+ResponseData BusinessLogic::executeTask(RequestData requestData)
 {
     std::cout << "BusinessLogic::executeTask()" << std::endl;
     ResponseData responseData;
@@ -24,13 +24,16 @@ void BusinessLogic::executeTask(RequestData requestData /*, BusinessLogicCallbac
     // }
     catch (const std::exception &ex)
     {
+        std::cout << Keys::_ERROR << ex.what() << std::endl;
         responseData.dataset[Keys::_ERROR] = {ex.what()};
     }
     catch (...)
     {
+        std::cout << Keys::_ERROR << "Unreadable exception" << std::endl;
         responseData.dataset[Keys::_ERROR] = {"Unreadable exception"};
     }
-
+    std::cout << "after try???" << std::endl;
     // Send response to client
     // callback(responseData);
+    return responseData;
 }

@@ -53,6 +53,7 @@ ResponseData UserModule::loginUser(const Dataset &dataset)
     //     }
     // }
     auto vec = m_userRepository->getByField(Keys::User::USERNAME, username);
+    std::cout << "POSLE" << std::endl;
     for (auto i : vec)
     {
         std::cout << "i[1] - " << i[1] << std::endl;
@@ -68,6 +69,7 @@ ResponseData UserModule::loginUser(const Dataset &dataset)
     // std::cout << "CONTAINS ----> " << result.contains << std::endl;
     // std::cout << "ERRORS ----> " << result.dataset.at(Keys::_ERROR).front() << std::endl;
     ResponseData r;
+    r.dataset[Keys::User::USERNAME] = {username};
     return r;
 }
 

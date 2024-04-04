@@ -17,7 +17,7 @@ class BusinessLogic
 public:
     BusinessLogic(const std::shared_ptr<RepositoryManager> &repositoryManager);
 
-    void executeTask(RequestData requestData /*, BusinessLogicCallback callback*/);
+    ResponseData executeTask(RequestData requestData);
 
 private:
     std::shared_ptr<UserModule> m_usersModule;
