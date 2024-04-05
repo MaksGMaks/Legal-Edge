@@ -38,7 +38,5 @@ ResponseData BusinessLogic::executeTask(RequestData requestData)
         responseData.dataset[Keys::_ERROR] = {"Unreadable exception"};
     }
     std::cout << "after try???" << std::endl;
-    // Send response to client
-    // callback(responseData);
     return responseData;
 }
