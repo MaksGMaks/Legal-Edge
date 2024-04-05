@@ -8,6 +8,7 @@
 #include "../Database/RepositoryManager.hpp"
 
 #include "UserModule.hpp"
+#include "CustomerModule.hpp"
 
 class RepositoryManager;
 class UserModule;
@@ -21,4 +22,5 @@ public:
 
 private:
     std::shared_ptr<UserModule> m_usersModule;
+    std::shared_ptr<CustomerModule> m_customerModule;
 };

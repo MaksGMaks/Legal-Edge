@@ -1,3 +1,4 @@
+
 #include <QObject>
 #include <QSharedPointer>
 
@@ -22,6 +23,8 @@ public:
 public slots:
     virtual void loginUser(const QString &username, const QString &password);
     virtual void registerUser(const QString &username, const QString &password);
+    virtual void sendPDFfile(const QString &path); // not needed
+    virtual void addNewCustomer(const QString &username, const QString &phone);
 
     // protected slots:
     //     void handleResponse(const QString &endpoint, Method &method, const Dataset &dataset);
