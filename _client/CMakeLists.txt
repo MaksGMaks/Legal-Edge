@@ -16,6 +16,10 @@ set(NETWORKING
     ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
     )
 
+# set(READERS
+#     ${CMAKE_CURRENT_SOURCE_DIR}/FilesReader/...)
+
+
 add_executable(${PROJECT_NAME} ${NETWORKING})
 
 # Link libraries 

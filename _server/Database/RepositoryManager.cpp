@@ -11,3 +11,8 @@ auto RepositoryManager::getUsersRepository() -> std::shared_ptr<UserRepository>
 {
     return m_userRepo;
 }
+
+auto RepositoryManager::getCustomerRepository() -> std::shared_ptr<CustomerRepository>
+{
+    return m_customerRepo;
+}
