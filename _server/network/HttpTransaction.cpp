@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <fstream>
 
 #include <boost/algorithm/string.hpp>
 
@@ -21,6 +22,20 @@ void HttpTransaction::start()
 {
     std::cout << "Start" << std::endl;
     do_read();
+}
+
+bool isPDFFile(const std::string &filename)
+{
+    std::ifstream file(filename, std::ios::binary);
+    if (!file.is_open())
+    {
+        std::cerr << "Failed to open file." << std::endl;
+        return false;
+    }
+
+    char header[4];
+    file.read(header, sizeof(header));
+    return (header[0] == '%' && header[1] == 'P' && header[2] == 'D' && header[3] == 'F');
 }
 
 void HttpTransaction::do_read()
@@ -82,36 +97,33 @@ void HttpTransaction::handle_request()
     {
         std::cout << "[Transaction ID: {}] - HttpSession::handle_request error: got invalid endpoint format" << std::endl;
     }
-    m_blm->executeTask(rd);
-    // auto data = m_serializer->deserialize(boost::beast::buffers_to_string(m_request.body().data()));
-    // std::string d;
-    // for (auto i : data[Keys::User::USERNAME])
-    // {
-    //     d = {i};
-    // }
-    // std::cout << "Message - ";
-    // std::cout << d << std::endl;
-    do_response();
+
+    ResponseData *resp;
+    auto callback = [resp](ResponseData response)
+    {
+        *resp = response;
+        return response;
+    };
+    auto response = m_blm->executeTask(rd);
+    std::cout << "ssssss" << std::endl;
+    do_response(response);
 }
 
-void HttpTransaction::do_response()
+void HttpTransaction::do_response(const ResponseData &response)
 {
     std::string content{"Hello from server!!!"};
     m_response.result(http::status::ok);
     m_response.version(11);
-
     m_response.set(http::field::server, "MyServer");
     m_response.set(http::field::content_type, "text/plain");
-    // m_response.set(http::field::content_length, std::to_string(content.size()));
-    Dataset dataset;
-    dataset[Keys::User::USERNAME] = {"admin"};
-    auto dat = m_serializer->serialize(dataset);
+    auto dat = m_serializer->serialize(std::move(response.dataset));
     boost::beast::ostream(m_response.body()) << dat;
+    http::write(m_stream, m_response);
+
     // boost::beast::ostream(m_response.body()) << content;
     // m_response.body()
     //     .insert(m_response.body().end(), content.begin(), content.end());
-
-    http::write(m_stream, m_response);
+    // m_response.set(http::field::content_length, std::to_string(content.size()));
 }
 
 std::vector<std::string> HttpTransaction::parseApi(const std::string endpoint)

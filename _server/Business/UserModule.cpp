@@ -38,21 +38,8 @@ ResponseData UserModule::loginUser(const Dataset &dataset)
     ResponseData response;
     auto username = dataset.at(Keys::User::USERNAME).front();
     auto password = dataset.at(Keys::User::PASSWORD).front();
-    // auto usersVec = m_userRepository->getByField(Keys::User::USERNAME, username);
-    // if (!usersVec.empty())
-    // {
-    //     User &user = usersVec.front();
-    //     if (user.password == password)
-    //     {
-    //         std::cout << "UsersModule::loginUser | SUCCESS" << std::endl;
-    //         user >> response.dataset;
-    //     }
-    //     else
-    //     {
-    //         std::cout << "UsersModule::loginUser | user entered incorrect password" << std::endl;
-    //     }
-    // }
     auto vec = m_userRepository->getByField(Keys::User::USERNAME, username);
+    std::cout << "POSLE" << std::endl;
     for (auto i : vec)
     {
         std::cout << "i[1] - " << i[1] << std::endl;
@@ -68,6 +55,7 @@ ResponseData UserModule::loginUser(const Dataset &dataset)
     // std::cout << "CONTAINS ----> " << result.contains << std::endl;
     // std::cout << "ERRORS ----> " << result.dataset.at(Keys::_ERROR).front() << std::endl;
     ResponseData r;
+    r.dataset[Keys::User::USERNAME] = {username};
     return r;
 }
 

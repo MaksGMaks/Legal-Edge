@@ -2,12 +2,13 @@
 
 #include <iostream>
 
-BusinessLogic::BusinessLogic(const std::shared_ptr<RepositoryManager> &repositoryManager) : m_usersModule(std::make_shared<UserModule>(repositoryManager))
+BusinessLogic::BusinessLogic(const std::shared_ptr<RepositoryManager> &repositoryManager) : m_usersModule(std::make_shared<UserModule>(repositoryManager)),
+                                                                                            m_customerModule(std::make_shared<CustomerModule>(repositoryManager))
 {
     std::cout << "BusinessLogic::BusinessLogic" << std::endl;
 }
 
-void BusinessLogic::executeTask(RequestData requestData /*, BusinessLogicCallback callback*/)
+ResponseData BusinessLogic::executeTask(RequestData requestData)
 {
     std::cout << "BusinessLogic::executeTask()" << std::endl;
     ResponseData responseData;
@@ -17,6 +18,10 @@ void BusinessLogic::executeTask(RequestData requestData /*, BusinessLogicCallbac
         {
             responseData = m_usersModule->executeTask(requestData);
         }
+        if (requestData.module == "customers")
+        {
+            responseData = m_customerModule->executeTask(requestData);
+        }
     }
     // catch (const ServerException &ex)
     // {
@@ -24,13 +29,14 @@ void BusinessLogic::executeTask(RequestData requestData /*, BusinessLogicCallbac
     // }
     catch (const std::exception &ex)
     {
+        std::cout << Keys::_ERROR << ex.what() << std::endl;
         responseData.dataset[Keys::_ERROR] = {ex.what()};
     }
     catch (...)
     {
+        std::cout << Keys::_ERROR << "Unreadable exception" << std::endl;
         responseData.dataset[Keys::_ERROR] = {"Unreadable exception"};
     }
-
-    // Send response to client
-    // callback(responseData);
+    std::cout << "after try???" << std::endl;
+    return responseData;
 }
