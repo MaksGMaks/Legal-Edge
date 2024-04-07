@@ -1,6 +1,5 @@
 #pragma once
 
-#include "DatabaseManager.hpp"
 #include "UserRepository.hpp"
 #include "CustomerRepository.hpp"
 

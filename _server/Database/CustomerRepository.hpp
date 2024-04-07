@@ -2,7 +2,6 @@
 
 #include "IRepository.hpp"
 #include "DatabaseManager.hpp"
-
 #include <memory>
 
 class CustomerRepository : public IRepository

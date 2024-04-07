@@ -47,14 +47,25 @@ namespace Database
 {
     enum Users
     {
+<<<<<<< HEAD
         DATABASE_USER_ID = (int)0,
         DATABASE_USER_USERNAME = (int)1,
         DATABASE_USER_PASSWORD = (int)2
+=======
+        ID = (int)0,
+        USERNAME = (int)1,
+        PASSWORD = (int)2
+>>>>>>> 914b388 (full chain)
     };
 
     enum Customer : int
     {
+<<<<<<< HEAD
         DATABASE_CUSTOMER_USERNAME,
         DATABASE_CUSTOMER_PHONE
+=======
+        USERNAME,
+        PHONE
+>>>>>>> 914b388 (full chain)
     };
 }
