@@ -12,7 +12,7 @@ UserRepository::~UserRepository()
     std::cout << "UserRepository::~UserRepository" << std::endl;
 }
 
-std::vector<std::vector<std::string>> UserRepository::getByField(const std::string &fieldName, const std::string &value) const
+std::vector<std::list<std::string>> UserRepository::getByField(const std::string &fieldName, const std::string &value) const
 {
     std::cout << "UsersRepository::getByField | {} = {} " << fieldName << ", " << value << std::endl;
     const std::string query = "SELECT ID, USERNAME, PASSWORD FROM Users WHERE " + fieldName + " = ?;";
@@ -20,7 +20,7 @@ std::vector<std::vector<std::string>> UserRepository::getByField(const std::stri
     return result;
 }
 
-std::vector<std::vector<std::string>> UserRepository::getAll() const
+std::vector<std::list<std::string>> UserRepository::getAll() const
 {
     const std::string query = "SELECT * FROM Users";
     auto result = m_dbManager->executeQuery(query);
