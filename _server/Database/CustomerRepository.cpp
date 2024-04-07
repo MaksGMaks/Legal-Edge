@@ -1,23 +1,23 @@
 #include "CustomerRepository.hpp"
 #include <iostream>
 
-CustomerRepository::CustomerRepository()
+CustomerRepository::CustomerRepository(std::shared_ptr<DatabaseManager> dbManager) : m_dbManager{dbManager}
 {
     std::cout << "CustomerRepository::CustomerRepository" << std::endl;
 }
 
-std::vector<std::vector<std::string>> CustomerRepository::getByField(const std::string &fieldName, const std::string &value) const
+std::vector<std::list<std::string>> CustomerRepository::getByField(const std::string &fieldName, const std::string &value) const
 {
-    std::vector<std::vector<std::string>> res;
     std::cout << "CustomerRepository::getByField" << std::endl;
-    // do smth
+    const std::string query = "SELECT username, phoneNumber FROM clients WHERE " + fieldName + " = ?;";
+    auto res = m_dbManager->executeQuery(query, {value});
     return res;
 }
 
-std::vector<std::vector<std::string>> CustomerRepository::getAll() const
+std::vector<std::list<std::string>> CustomerRepository::getAll() const
 {
-    std::vector<std::vector<std::string>> res;
     std::cout << "CustomerRepository::getAll" << std::endl;
-    // do smth
+    const std::string query = "SELEST * FROM clients";
+    auto res = m_dbManager->executeQuery(query);
     return res;
 }

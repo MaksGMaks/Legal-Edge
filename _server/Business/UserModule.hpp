@@ -2,7 +2,6 @@
 
 #include "IBusienessModule.hpp"
 #include "../Database/RepositoryManager.hpp"
-#include "../Database/Entities/User.hpp"
 
 #include <memory>
 

@@ -16,12 +16,25 @@ ResponseData CustomerModule::executeTask(const RequestData &requestData)
     {
         response = createNewCustomer(requestData.dataset);
     }
+    if (requestData.submodule == "get" && requestData.module == "GET")
+    {
+        response = getAllCustomer();
+    }
     return response;
 }
 ResponseData CustomerModule::createNewCustomer(const Dataset &dataset)
 {
     std::cout << "CustomerModule::createNewCustomer" << std::endl;
     ResponseData res;
+    return res;
+}
 
+ResponseData CustomerModule::getAllCustomer()
+{
+    ResponseData res;
+    std::cout << "CustomerModule::getAllCustomer" << std::endl;
+    auto resp = m_customerManager->getAll();
+    res.dataset[Keys::Customer::USERNAME] = resp[Database::Customer::USERNAME];
+    res.dataset[Keys::Customer::PHONE] = resp[Database::Customer::PHONE];
     return res;
 }

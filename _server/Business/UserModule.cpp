@@ -33,29 +33,12 @@ ResponseData UserModule::executeTask(const RequestData &requestData)
 ResponseData UserModule::loginUser(const Dataset &dataset)
 {
     std::cout << "UserModule::loginUser() - " << std::endl;
-    // call userRepository
     ResponseData response;
     auto username = dataset.at(Keys::User::USERNAME).front();
     auto password = dataset.at(Keys::User::PASSWORD).front();
     auto vec = m_userRepository->getByField(Keys::User::USERNAME, username);
-    std::cout << "POSLE" << std::endl;
-    for (auto i : vec)
-    {
-        std::cout << "i[1] - " << i[1] << std::endl;
-        std::cout << "username - " << username << std::endl;
-        if (i[1] == username)
-        {
-            std::cout << "YES, YES, YES" << std::endl;
-        }
-    }
-    // auto result = m_db->executeQuery("SELECT * FROM users WHERE USERNAME = ? AND PASSWORD = ?", {username, password});
-
-    // std::cout << "-----RESULTS----" << std::endl;
-    // std::cout << "CONTAINS ----> " << result.contains << std::endl;
-    // std::cout << "ERRORS ----> " << result.dataset.at(Keys::_ERROR).front() << std::endl;
-    ResponseData r;
-    r.dataset[Keys::User::USERNAME] = {username};
-    return r;
+    response.dataset[Keys::User::USERNAME] = vec[Database::Users::USERNAME];
+    return response;
 }
 
 ResponseData UserModule::registerUser(const Dataset &dataset)
