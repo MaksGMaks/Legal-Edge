@@ -21,8 +21,8 @@ public:
     ~DatabaseManager();
 
     // dbResponse executeQuery(const std::string &query, const std::vector<std::string> &params);
-    std::vector<std::vector<std::string>> executeQuery(const std::string &query, const std::vector<std::string> &params);
-    std::vector<std::vector<std::string>> executeQuery(const std::string &query);
+    std::vector<std::list<std::string>> executeQuery(const std::string &query, const std::vector<std::string> &params);
+    std::vector<std::list<std::string>> executeQuery(const std::string &query);
 
     // void selectTest();
 

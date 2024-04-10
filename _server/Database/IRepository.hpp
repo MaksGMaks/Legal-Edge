@@ -11,6 +11,6 @@ public:
     virtual void add(const std::initializer_list<std::string> &lst) = 0;
     // virtual void update(const T &entity) = 0;
     // virtual void deleteResource(const std::string &id) = 0;
-    virtual std::vector<std::vector<std::string>> getByField(const std::string &fieldName, const std::string &value) const = 0;
-    virtual std::vector<std::vector<std::string>> getAll() const = 0;
+    virtual std::vector<std::list<std::string>> getByField(const std::string &fieldName, const std::string &value) const = 0;
+    virtual std::vector<std::list<std::string>> getAll() const = 0;
 };
