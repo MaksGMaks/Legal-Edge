@@ -37,14 +37,36 @@ ResponseData UserModule::loginUser(const Dataset &dataset)
     auto username = dataset.at(Keys::User::USERNAME).front();
     auto password = dataset.at(Keys::User::PASSWORD).front();
     auto vec = m_userRepository->getByField(Keys::User::USERNAME, username);
-    response.dataset[Keys::User::USERNAME] = vec[Database::Users::USERNAME];
+    if (!vec.empty())
+    {
+        response.dataset[Keys::User::USERNAME] = {vec[0][Database::Users::DATABASE_USER_USERNAME]};
+    }
+    else
+    {
+        std::cout << "user does not exist" << std::endl;
+        throw std::runtime_error("user does not exist");
+    }
+    response.dataset[Keys::User::USERNAME] = {vec[0][Database::Users::DATABASE_USER_USERNAME]};
     return response;
 }
 
 ResponseData UserModule::registerUser(const Dataset &dataset)
 {
     std::cout << "UserModule::registerUser() - " << std::endl;
-    // call userRepository
-    ResponseData r;
-    return r;
+    // test id:
+    std::string id = "12";
+    // test id||
+    ResponseData res;
+    auto username = dataset.at(Keys::User::USERNAME).front();
+    auto password = dataset.at(Keys::User::PASSWORD).front();
+    auto vec = m_userRepository->getByField(Keys::User::USERNAME, username);
+    if (vec.empty())
+    {
+        m_userRepository->add({id, username, password});
+    }
+    else
+    {
+        std::cout << "already exist" << std::endl;
+    }
+    return res;
 }

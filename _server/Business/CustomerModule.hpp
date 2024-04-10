@@ -13,7 +13,7 @@ public:
 
 private:
     ResponseData createNewCustomer(const Dataset &dataset);
-    ResponseData getAllCustomer();
+    ResponseData getAllCustomers();
 
 private:
     std::shared_ptr<IRepository> m_customerManager;

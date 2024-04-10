@@ -22,16 +22,15 @@ std::vector<std::list<std::string>> UserRepository::getByField(const std::string
 
 std::vector<std::list<std::string>> UserRepository::getAll() const
 {
+    std::cout << "UserRepository::getAll" << std::endl;
     const std::string query = "SELECT * FROM Users";
     auto result = m_dbManager->executeQuery(query);
     return result;
 }
 
-// User UserRepository::userFromCurrentRow(const std::shared_ptr<IQueryResult> &queryResult) const
-// {
-//     return User(
-//         queryResult->getString(ID),
-//         queryResult->getString(USERNAME),
-//         queryResult->getString(PASSWORD),
-//         queryResult->getString(ROLE_ID));
-// }
+void UserRepository::add(const std::initializer_list<std::string> &lst)
+{
+    std::cout << "UserRepository::add" << std::endl;
+    const std::string query = "INSERT INTO Users (id, username, password) VALUES(?,?,?)";
+    auto res = m_dbManager->executeQuery(query, lst);
+}

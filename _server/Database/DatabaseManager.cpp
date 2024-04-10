@@ -67,7 +67,7 @@ void DatabaseManager::start()
                 std::string sql = sqlBuilder.str();
                 if (executeSql(db, sql) != 0)
                 {
-                    std::cerr << "Ошибка выполнения SQL-скрипта из файла: " << filename << std::endl;
+                    std::cerr << "ERROR IN THE HEART OF WHILE - " << filename << std::endl;
                 }
                 sqlBuilder.str("");
                 sqlBuilder.clear();
@@ -78,6 +78,7 @@ void DatabaseManager::start()
 
 std::vector<std::list<std::string>> DatabaseManager::executeQuery(const std::string &query, const std::vector<std::string> &params)
 {
+    std::lock_guard<std::mutex> lock(m_mutex);
     sqlite3_stmt *stmt;
 
     // Подготавливаем SQL запрос
@@ -135,6 +136,7 @@ std::vector<std::list<std::string>> DatabaseManager::executeQuery(const std::str
 
 std::vector<std::list<std::string>> DatabaseManager::executeQuery(const std::string &query)
 {
+    std::lock_guard<std::mutex> lock(m_mutex);
     sqlite3_stmt *stmt;
     std::vector<std::list<std::string>> result;
 

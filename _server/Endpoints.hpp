@@ -47,14 +47,14 @@ namespace Database
 {
     enum Users
     {
-        ID = (int)0,
-        USERNAME = (int)1,
-        PASSWORD = (int)2
+        DATABASE_USER_ID = (int)0,
+        DATABASE_USER_USERNAME = (int)1,
+        DATABASE_USER_PASSWORD = (int)2
     };
 
     enum Customer : int
     {
-        USERNAME,
-        PHONE
+        DATABASE_CUSTOMER_USERNAME,
+        DATABASE_CUSTOMER_PHONE
     };
 }
