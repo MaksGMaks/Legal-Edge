@@ -15,11 +15,6 @@
 
 const QString SERVER_API_URL{"http://127.0.0.1:8080/api"};
 
-void DOWORK()
-{
-    qDebug() << "DOWORK";
-}
-
 class MyThread : public QThread
 {
 private:
@@ -63,14 +58,15 @@ int main(int argc, char *argv[])
     net.setApiUrl(SERVER_API_URL);
     net.setSerializer(std::make_unique<JsonSerializer>());
     ApiManager api(net);
-    api.loginUser("admin2", "admin2");
-    qDebug() << "sleeping";
-    DOWORK();
+    // api.loginUser("admin2", "admin2");
+    // qDebug() << "sleeping";
+    api.registerUser("admin4", "admin4");
+    qDebug() << "Sdldjsgldfghs";
+    api.loginUser("admin4", "admin4");
+    // qDebug() << "attempt no 2";
+    // api.addNewCustomer("bro", "0973333");
 
-    qDebug() << "attempt no 2";
-    api.addNewCustomer("bro", "0973333");
-
-    qDebug() << "attempt no 3";
-    api.registerUser("dada", "dawda");
+    // qDebug() << "attempt no 3";
+    // api.registerUser("dada", "dawda");
     return a.exec();
 }

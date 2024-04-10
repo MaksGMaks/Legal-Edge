@@ -1,6 +1,7 @@
 #pragma once
 
 #include <list>
+#include <vector>
 #include <unordered_map>
 #include <string>
 #include <functional>
@@ -8,7 +9,7 @@
 struct RequestData;
 struct ResponseData;
 
-using Data = std::list<std::string>;
+using Data = std::vector<std::string>;
 using Dataset = std::unordered_map<std::string, Data>;
 using BusinessLogicCallback = std::function<void(ResponseData)>;
 
@@ -26,9 +27,8 @@ struct ResponseData
     Dataset dataset;
 };
 
-struct dbResponse
+struct adble
 {
-    int SQL_OK;
-    bool contains = false;
-    Dataset dataset;
+    std::vector<std::string> vectorArgs;
+    std::string ID;
 };
