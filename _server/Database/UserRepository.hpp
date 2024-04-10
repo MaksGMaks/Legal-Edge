@@ -11,7 +11,7 @@ public:
     explicit UserRepository(std::shared_ptr<DatabaseManager> dbManager);
     ~UserRepository() override;
 
-    //     void add(const User &entity) override;
+    void add(const std::initializer_list<std::string> &lst) override;
     //     void update(const User &entity) override;
     //     void deleteResource(const std::string &id) override;
     virtual std::vector<std::vector<std::string>> getByField(const std::string &fieldName, const std::string &value) const override;

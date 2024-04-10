@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <sqlite3.h>
+#include <mutex>
 
 #include "../dataTypes.hpp"
 
@@ -10,6 +11,8 @@ class DatabaseManager
 private:
     const std::string m_path_to_db;
     const std::string m_configure_path;
+
+    std::mutex m_mutex;
 
     sqlite3 *db;
 

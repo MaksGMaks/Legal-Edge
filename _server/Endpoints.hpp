@@ -35,4 +35,26 @@ namespace Keys
         inline constexpr char ID[] = "id";
         inline constexpr char NAME[] = "name";
     }
+
+    namespace Customer
+    {
+        inline constexpr char USERNAME[] = "username";
+        inline constexpr char PHONE[] = "phone";
+    }
+}
+
+namespace Database
+{
+    enum Users
+    {
+        DATABASE_USER_ID = (int)0,
+        DATABASE_USER_USERNAME = (int)1,
+        DATABASE_USER_PASSWORD = (int)2
+    };
+
+    enum Customer : int
+    {
+        DATABASE_CUSTOMER_USERNAME,
+        DATABASE_CUSTOMER_PHONE
+    };
 }

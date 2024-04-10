@@ -33,35 +33,40 @@ ResponseData UserModule::executeTask(const RequestData &requestData)
 ResponseData UserModule::loginUser(const Dataset &dataset)
 {
     std::cout << "UserModule::loginUser() - " << std::endl;
-    // call userRepository
     ResponseData response;
     auto username = dataset.at(Keys::User::USERNAME).front();
     auto password = dataset.at(Keys::User::PASSWORD).front();
     auto vec = m_userRepository->getByField(Keys::User::USERNAME, username);
-    std::cout << "POSLE" << std::endl;
-    for (auto i : vec)
+    if (!vec.empty())
     {
-        std::cout << "i[1] - " << i[1] << std::endl;
-        std::cout << "username - " << username << std::endl;
-        if (i[1] == username)
-        {
-            std::cout << "YES, YES, YES" << std::endl;
-        }
+        response.dataset[Keys::User::USERNAME] = {vec[0][Database::Users::DATABASE_USER_USERNAME]};
     }
-    // auto result = m_db->executeQuery("SELECT * FROM users WHERE USERNAME = ? AND PASSWORD = ?", {username, password});
-
-    // std::cout << "-----RESULTS----" << std::endl;
-    // std::cout << "CONTAINS ----> " << result.contains << std::endl;
-    // std::cout << "ERRORS ----> " << result.dataset.at(Keys::_ERROR).front() << std::endl;
-    ResponseData r;
-    r.dataset[Keys::User::USERNAME] = {username};
-    return r;
+    else
+    {
+        std::cout << "user does not exist" << std::endl;
+        throw std::runtime_error("user does not exist");
+    }
+    response.dataset[Keys::User::USERNAME] = {vec[0][Database::Users::DATABASE_USER_USERNAME]};
+    return response;
 }
 
 ResponseData UserModule::registerUser(const Dataset &dataset)
 {
     std::cout << "UserModule::registerUser() - " << std::endl;
-    // call userRepository
-    ResponseData r;
-    return r;
+    // test id:
+    std::string id = "12";
+    // test id||
+    ResponseData res;
+    auto username = dataset.at(Keys::User::USERNAME).front();
+    auto password = dataset.at(Keys::User::PASSWORD).front();
+    auto vec = m_userRepository->getByField(Keys::User::USERNAME, username);
+    if (vec.empty())
+    {
+        m_userRepository->add({id, username, password});
+    }
+    else
+    {
+        std::cout << "already exist" << std::endl;
+    }
+    return res;
 }
