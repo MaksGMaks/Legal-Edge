@@ -6,7 +6,7 @@ CustomerRepository::CustomerRepository(std::shared_ptr<DatabaseManager> dbManage
     std::cout << "CustomerRepository::CustomerRepository" << std::endl;
 }
 
-std::vector<std::list<std::string>> CustomerRepository::getByField(const std::string &fieldName, const std::string &value) const
+std::vector<std::vector<std::string>> CustomerRepository::getByField(const std::string &fieldName, const std::string &value) const
 {
     std::cout << "CustomerRepository::getByField" << std::endl;
     const std::string query = "SELECT username, phoneNumber FROM Clients WHERE " + fieldName + " = ?;";
@@ -14,7 +14,7 @@ std::vector<std::list<std::string>> CustomerRepository::getByField(const std::st
     return res;
 }
 
-std::vector<std::list<std::string>> CustomerRepository::getAll() const
+std::vector<std::vector<std::string>> CustomerRepository::getAll() const
 {
     std::cout << "CustomerRepository::getAll" << std::endl;
     const std::string query = "SELECT * FROM Clients;";

@@ -76,7 +76,7 @@ void DatabaseManager::start()
     }
 }
 
-std::vector<std::list<std::string>> DatabaseManager::executeQuery(const std::string &query, const std::vector<std::string> &params)
+std::vector<std::vector<std::string>> DatabaseManager::executeQuery(const std::string &query, const std::vector<std::string> &params)
 {
     std::lock_guard<std::mutex> lock(m_mutex);
     sqlite3_stmt *stmt;
@@ -104,13 +104,13 @@ std::vector<std::list<std::string>> DatabaseManager::executeQuery(const std::str
     }
 
     // Создаем двумерный вектор для хранения результатов
-    std::vector<std::list<std::string>> result;
+    std::vector<std::vector<std::string>> result;
 
     // Выполняем запрос
     while ((rc = sqlite3_step(stmt)) == SQLITE_ROW)
     {
         // Создаем временный вектор для хранения данных текущей строки результата
-        std::list<std::string> row;
+        std::vector<std::string> row;
 
         // Получаем и сохраняем значения столбцов текущей строки
         for (int i = 0; i < sqlite3_column_count(stmt); ++i)
@@ -134,7 +134,7 @@ std::vector<std::list<std::string>> DatabaseManager::executeQuery(const std::str
     return result;
 }
 
-std::vector<std::list<std::string>> DatabaseManager::executeQuery(const std::string &query)
+std::vector<std::vector<std::string>> DatabaseManager::executeQuery(const std::string &query)
 {
     std::lock_guard<std::mutex> lock(m_mutex);
     sqlite3_stmt *stmt;
@@ -206,7 +206,7 @@ std::vector<std::vector<std::string>> DatabaseManager::executeQuery(const std::s
     while ((rc = sqlite3_step(stmt)) == SQLITE_ROW)
     {
         // Создаем временный вектор для хранения данных текущей строки результата
-        std::list<std::string> row;
+        std::vector<std::string> row;
 
         // Получаем и сохраняем значения столбцов текущей строки
         for (int i = 0; i < sqlite3_column_count(stmt); ++i)
