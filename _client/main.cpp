@@ -42,13 +42,13 @@ int main(int argc, char *argv[])
     ApiManager api(net);
     // api.loginUser("admin2", "admin2");
     // qDebug() << "sleeping";
-    api.registerUser("admin4", "admin4");
-    qDebug() << "Sdldjsgldfghs";
-    api.loginUser("admin4", "admin4");
-    // qDebug() << "attempt no 2";
-    // api.addNewCustomer("bro", "0973333");
+    // api.registerUser("admin4", "admin4");
+    // qDebug() << "Sdldjsgldfghs";
+    // api.loginUser("admin4", "admin4");
+    qDebug() << "attempt no 2";
+    api.addNewCustomer("bro", "0973333");
 
-    // qDebug() << "attempt no 3";
-    // api.registerUser("dada", "dawda");
+    qDebug() << "attempt no 3";
+    api.registerUser("dada", "dawda");
     return a.exec();
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../DataTypes.hpp"
+#include "../dataTypes.hpp"
 #include <initializer_list>
 
 class IRepository
