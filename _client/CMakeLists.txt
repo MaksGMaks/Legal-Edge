@@ -8,19 +8,31 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
-set(NETWORKING 
-    ${CMAKE_CURRENT_SOURCE_DIR}/network/NetworkService.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/network/ApiManager.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/network/JsonSerializer.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/dataTypes.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+set(UI_PATH "${CMAKE_CURRENT_SOURCE_DIR}/Ui")
+set(NET_PATH "${CMAKE_CURRENT_SOURCE_DIR}/network")
+
+set(UI_SOURCES
+    ${UI_PATH}/MainWindow.cpp
+    ${UI_PATH}/UiManager.cpp
+    ${UI_PATH}/Style.hpp)
+
+set(NET_SOURCES 
+    ${NET_PATH}/NetworkService.cpp
+    ${NET_PATH}/ApiManager.cpp
+    ${NET_PATH}/JsonSerializer.cpp
     )
 
-# set(READERS
-#     ${CMAKE_CURRENT_SOURCE_DIR}/FilesReader/...)
+set(MAIN_SOURCES
+${CMAKE_CURRENT_SOURCE_DIR}/LegalEdgeClient.cpp
+${CMAKE_CURRENT_SOURCE_DIR}/dataTypes.hpp
+${CMAKE_CURRENT_SOURCE_DIR}/main.cpp)
 
+set(ALL_SOURCES
+${UI_SOURCES}
+${NET_SOURCES}
+${MAIN_SOURCES})
 
-add_executable(${PROJECT_NAME} ${NETWORKING})
+add_executable(${PROJECT_NAME} ${ALL_SOURCES})
 
 # Link libraries 
 target_link_libraries(${PROJECT_NAME} 

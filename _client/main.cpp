@@ -1,8 +1,12 @@
 #include <iostream>
 
 #include <QCoreApplication>
+#include <QApplication>
 #include "network/ApiManager.hpp"
 #include "network/JsonSerializer.hpp"
+
+#include "Ui/UiManager.hpp"
+#include "LegalEdgeClient.hpp"
 
 // for test
 #include <QThread>
@@ -47,6 +51,20 @@ int main(int argc, char *argv[])
     // api.loginUser("admin4", "admin4");
     qDebug() << "attempt no 2";
     api.addNewCustomer("bro", "0973333");
+
+    QApplication app(argc, argv);
+
+    // Network setup
+    NetworkService network(nullptr);
+    network.setApiUrl(SERVER_API_URL);
+    network.setSerializer(std::make_unique<JsonSerializer>());
+    ApiManager apiManager(network);
+
+    // Client setup
+    UiManager uiManager(app);
+    LegalEdgeClient client(uiManager, apiManager);
+
+    client.start();
 
     qDebug() << "attempt no 3";
     api.registerUser("dada", "dawda");
