@@ -8,13 +8,13 @@ UiManager::UiManager(QApplication &app) noexcept
 }
 
 void UiManager::setupUi()
-{   
+{
     qDebug() << "UiManager: constructor";
     m_mainWindow = new MainWindow();
 }
 
 void UiManager::startUi()
-{   
+{
     qDebug() << "UiManager: MainWindow show maximized";
     m_mainWindow->show();
 }

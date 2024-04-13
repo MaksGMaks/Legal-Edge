@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QObject>
-#include <QApplication>
+#include <QCoreApplication>
 
 #include "MainWindow.hpp"
 
@@ -15,7 +15,6 @@ public:
 
     void setupUi();
     void startUi();
-
 
 protected:
     QApplication &m_app;

@@ -17,7 +17,7 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    virtual ~MainWindow() ;
+    virtual ~MainWindow();
 
     void init();
 
@@ -31,7 +31,7 @@ private:
     // menu bar
     QMenuBar *m_mainMenuBar;
 
-    //functions
-    void pageHandler(int index);
-    QMenu* createMenu(const QString & text, int index);
+    // functions
+    //  void pageHandler(int index);
+    //  QMenu* createMenu(const QString & text, int index);
 };
