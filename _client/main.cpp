@@ -1,8 +1,12 @@
 #include <iostream>
 
 #include <QCoreApplication>
+#include <QApplication>
 #include "network/ApiManager.hpp"
 #include "network/JsonSerializer.hpp"
+
+#include "Ui/UiManager.hpp"
+#include "LegalEdgeClient.hpp"
 
 // for test
 #include <QThread>
@@ -35,20 +39,27 @@ public:
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
+    // Network setup
+    QApplication app(argc, argv);
     NetworkService net(nullptr);
     net.setApiUrl(SERVER_API_URL);
     net.setSerializer(std::make_unique<JsonSerializer>());
-    ApiManager api(net);
-    // api.loginUser("admin2", "admin2");
+    ApiManager apiManager(net);
+    // apiManager.loginUser("admin2", "admin2");
     // qDebug() << "sleeping";
-    // api.registerUser("admin4", "admin4");
+    // apiManager.registerUser("admin4", "admin4");
     // qDebug() << "Sdldjsgldfghs";
-    // api.loginUser("admin4", "admin4");
+    // apiManager.loginUser("admin4", "admin4");
     qDebug() << "attempt no 2";
-    api.addNewCustomer("bro", "0973333");
-
+    apiManager.addNewCustomer("bro", "0973333");
     qDebug() << "attempt no 3";
-    api.registerUser("dada", "dawda");
-    return a.exec();
+    apiManager.registerUser("dada", "dawda");
+
+    // Client setup
+    UiManager uiManager(app);
+    LegalEdgeClient client(uiManager, apiManager);
+
+    client.start();
+
+    return app.exec();
 }
