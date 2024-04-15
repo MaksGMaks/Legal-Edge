@@ -5,6 +5,8 @@
 #include <QMenuBar>
 #include <QMenu>
 #include <QString>
+#include <QLabel>
+#include <QHBoxLayout>
 
 #include <QDebug>
 #include <QStatusBar>
@@ -32,6 +34,6 @@ private:
     QMenuBar *m_mainMenuBar;
 
     // functions
-    //  void pageHandler(int index);
-    //  QMenu* createMenu(const QString & text, int index);
+    // void pageHandler(int index);
+    // void createMenu(QMenuBar *menu, const QString &text, int index);
 };
