@@ -13,7 +13,7 @@ void UiManager::setupUi()
     m_caseManagment = new CaseManagment();
     m_caseManagment->init();
     m_caseManagment->connectButtons();
-    // m_widgets.append(m_caseManagment);
+    m_widgets.append(m_caseManagment);
 
     m_helper = new Helper();
     m_helper->init();
