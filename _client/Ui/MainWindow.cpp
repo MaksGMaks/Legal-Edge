@@ -2,20 +2,20 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
-    this->init();
-    m_stackView = new QStackedWidget(this);
 }
 
 MainWindow::~MainWindow()
 {
 }
 
-void MainWindow::init()
+void MainWindow::init(const QVector<QWidget *> widgets)
 {
     qDebug() << "MainWindow: init";
     this->resize(Window::WIDTH, Window::HEIGHT);
     m_stackView = new QStackedWidget(this);
 
+    for (auto widget : widgets)
+        m_stackView->addWidget(widget);
     // // Widget1
     // QWidget *test = new QWidget(this);
     // QLabel *testLabel = new QLabel("TEST 1");

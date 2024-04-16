@@ -7,11 +7,12 @@
 #include <QString>
 #include <QLabel>
 #include <QHBoxLayout>
+#include <QVector>
 
 #include <QDebug>
 #include <QStatusBar>
 
-#include "Style.hpp"
+#include "Widgets/Style.hpp"
 
 class MainWindow : public QMainWindow
 {
@@ -21,7 +22,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     virtual ~MainWindow();
 
-    void init();
+    void init(const QVector<QWidget *> widgets);
 
     // override resizeEvent
     void resizeEvent(QResizeEvent *event) override;
