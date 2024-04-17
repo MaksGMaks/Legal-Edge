@@ -19,8 +19,8 @@ void Helper::init()
     m_bookOfLaws->resize(Button::WIDTH, Button::HEIGHT);
 
     // init spacers
-    m_upButtonV = new QSpacerItem(20, 250, QSizePolicy::Minimum, QSizePolicy::Maximum);
-    m_downButtonV = new QSpacerItem(20, 250, QSizePolicy::Minimum, QSizePolicy::Maximum);
+    m_upButtonV = new QSpacerItem(20, 200, QSizePolicy::Minimum, QSizePolicy::Maximum);
+    m_downButtonV = new QSpacerItem(20, 200, QSizePolicy::Minimum, QSizePolicy::Maximum);
 
     m_leftButtonH = new QSpacerItem(700, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
     m_rightButtonH = new QSpacerItem(100, 20, QSizePolicy::Maximum, QSizePolicy::Minimum);
