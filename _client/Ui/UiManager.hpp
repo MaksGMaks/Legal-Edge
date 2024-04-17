@@ -1,9 +1,12 @@
 #pragma once
 
 #include <QObject>
-#include <QCoreApplication>
+#include <QApplication>
+#include <QVector>
 
 #include "MainWindow.hpp"
+#include "Widgets/CaseManagment.hpp"
+#include "Widgets/Helper.hpp"
 
 class UiManager : public QObject
 {
@@ -19,4 +22,8 @@ public:
 protected:
     QApplication &m_app;
     MainWindow *m_mainWindow;
+
+    QVector<QWidget *> m_widgets;
+    CaseManagment *m_caseManagment;
+    Helper *m_helper;
 };
