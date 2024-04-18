@@ -14,14 +14,16 @@ void UiManager::setupUi()
     m_caseManagment->init();
     m_caseManagment->connectButtons();
     m_widgets.append(m_caseManagment);
+    m_widgetNames.append("Case Managment");
 
     m_helper = new Helper();
     m_helper->init();
     m_helper->connectButtons();
     m_widgets.append(m_helper);
+    m_widgetNames.append("Helper");
 
     m_mainWindow = new MainWindow();
-    m_mainWindow->init(m_widgets);
+    m_mainWindow->init(m_widgets, m_widgetNames);
 }
 
 void UiManager::startUi()

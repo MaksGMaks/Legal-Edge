@@ -24,6 +24,7 @@ protected:
     MainWindow *m_mainWindow;
 
     QVector<QWidget *> m_widgets;
+    QVector<QString> m_widgetNames;
     CaseManagment *m_caseManagment;
     Helper *m_helper;
 };
