@@ -10,7 +10,7 @@
 #include <QDebug>
 #include <QStatusBar>
 
-#include "Widgets/Style.hpp"
+#include "Widgets/SubWidgets/Style.hpp"
 
 class MainWindow : public QMainWindow
 {

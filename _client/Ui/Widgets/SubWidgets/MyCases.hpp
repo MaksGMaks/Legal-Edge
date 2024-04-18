@@ -16,8 +16,10 @@ class MyCases : public QWidget
 
 private:
     // buttons
-    QPushButton *m_bookOfLaws;
-    QPushButton *m_notations;
+    QPushButton *m_actualCases;
+    QPushButton *m_savedCases;
+    QPushButton *m_savedDocs;
+    QPushButton *m_exitButton;
 
     // layouts
     QVBoxLayout *m_buttonStack;
@@ -39,10 +41,14 @@ public:
     void connectButtons();
 
 signals:
-    void openBookOfLaws();
-    void openNotations();
+    void openActualCases();
+    void openSavedCases();
+    void openSavedDocs();
+    void useExit();
 
 protected slots:
-    void onBookOfLawsClicked();
-    void onNotationsClicked();
+    void onActualCasesClicked();
+    void onSavedCasesClicked();
+    void onSavedDocsClicked();
+    void onExitClicked();
 };

@@ -16,8 +16,9 @@ class AddEvent : public QWidget
 
 private:
     // buttons
-    QPushButton *m_bookOfLaws;
-    QPushButton *m_notations;
+    QPushButton *m_newEvent;
+    QPushButton *m_patternEvent;
+    QPushButton *m_exitButton;
 
     // layouts
     QVBoxLayout *m_buttonStack;
@@ -39,10 +40,12 @@ public:
     void connectButtons();
 
 signals:
-    void openBookOfLaws();
-    void openNotations();
+    void createNewEvent();
+    void createPatternEvent();
+    void useExit();
 
 protected slots:
-    void onBookOfLawsClicked();
-    void onNotationsClicked();
+    void onNewEventClicked();
+    void onPatternEventClicked();
+    void onExitClicked();
 };

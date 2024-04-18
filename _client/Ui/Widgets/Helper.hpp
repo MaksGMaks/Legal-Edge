@@ -8,7 +8,7 @@
 
 #include <QDebug>
 
-#include "Style.hpp"
+#include "SubWidgets/Style.hpp"
 
 class Helper : public QWidget
 {
