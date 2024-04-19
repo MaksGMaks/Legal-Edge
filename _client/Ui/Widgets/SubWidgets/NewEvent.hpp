@@ -8,16 +8,17 @@
 
 #include <QDebug>
 
-#include "SubWidgets/Style.hpp"
+#include "Style.hpp"
 
-class Helper : public QWidget
+class NewEvent : public QWidget
 {
     Q_OBJECT
 
 private:
     // buttons
-    QPushButton *m_bookOfLaws;
-    QPushButton *m_notations;
+    QPushButton *m_work;
+    QPushButton *m_personal;
+    QPushButton *m_exitButton;
 
     // layouts
     QVBoxLayout *m_buttonStack;
@@ -32,17 +33,19 @@ private:
     QSpacerItem *m_rightButtonH;
 
 public:
-    Helper(QWidget *parent = nullptr);
-    ~Helper();
+    NewEvent(QWidget *parent = nullptr);
+    ~NewEvent();
 
     void init();
     void connectButtons();
 
 signals:
-    void openBookOfLaws();
-    void openNotations();
+    void createWork();
+    void createPersonal();
+    void useExit();
 
 protected slots:
-    void onBookOfLawsClicked();
-    void onNotationsClicked();
+    void onWorkClicked();
+    void onPersonalClicked();
+    void onExitClicked();
 };

@@ -14,9 +14,13 @@ set(NET_PATH "${CMAKE_CURRENT_SOURCE_DIR}/network")
 set(UI_SOURCES
     ${UI_PATH}/MainWindow.cpp
     ${UI_PATH}/UiManager.cpp
-    ${UI_PATH}/Widgets/Style.hpp
+    ${UI_PATH}/Widgets/SubWidgets/Style.hpp
     ${UI_PATH}/Widgets/CaseManagment.cpp
-    ${UI_PATH}/Widgets/Helper.cpp)
+    ${UI_PATH}/Widgets/Helper.cpp
+    ${UI_PATH}/Widgets/Plans.cpp
+    ${UI_PATH}/Widgets/SubWidgets/AddEvent.cpp
+    ${UI_PATH}/Widgets/SubWidgets/MyCases.cpp
+    ${UI_PATH}/Widgets/SubWidgets/NewEvent.cpp)
 
 set(NET_SOURCES 
     ${NET_PATH}/NetworkService.cpp

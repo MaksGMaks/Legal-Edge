@@ -10,14 +10,15 @@
 
 #include "SubWidgets/Style.hpp"
 
-class Helper : public QWidget
+class Plans : public QWidget
 {
     Q_OBJECT
 
 private:
     // buttons
-    QPushButton *m_bookOfLaws;
-    QPushButton *m_notations;
+    QPushButton *m_viewEvents;
+    QPushButton *m_addEvent;
+    QPushButton *m_editData;
 
     // layouts
     QVBoxLayout *m_buttonStack;
@@ -32,17 +33,19 @@ private:
     QSpacerItem *m_rightButtonH;
 
 public:
-    Helper(QWidget *parent = nullptr);
-    ~Helper();
+    Plans(QWidget *parent = nullptr);
+    ~Plans();
 
     void init();
     void connectButtons();
 
 signals:
-    void openBookOfLaws();
-    void openNotations();
+    void openViewEvents();
+    void openAddEvent();
+    void openEditData();
 
 protected slots:
-    void onBookOfLawsClicked();
-    void onNotationsClicked();
+    void onViewEventsClicked();
+    void onAddEventClicked();
+    void onEditDataClicked();
 };
