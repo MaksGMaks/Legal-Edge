@@ -10,6 +10,7 @@ set(CMAKE_AUTORCC ON)
 
 set(UI_PATH "${CMAKE_CURRENT_SOURCE_DIR}/Ui")
 set(NET_PATH "${CMAKE_CURRENT_SOURCE_DIR}/network")
+set(READ_PATH "${CMAKE_CURRENT_SOURCE_DIR}/FilesReader")
 
 set(UI_SOURCES
     ${UI_PATH}/MainWindow.cpp
@@ -21,6 +22,9 @@ set(UI_SOURCES
     ${UI_PATH}/Widgets/SubWidgets/AddEvent.cpp
     ${UI_PATH}/Widgets/SubWidgets/MyCases.cpp
     ${UI_PATH}/Widgets/SubWidgets/NewEvent.cpp)
+
+set(READER_SOURCE
+    ${READ_PATH}/Reader.cpp)
 
 set(NET_SOURCES 
     ${NET_PATH}/NetworkService.cpp
@@ -36,7 +40,8 @@ ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp)
 set(ALL_SOURCES
 ${UI_SOURCES}
 ${NET_SOURCES}
-${MAIN_SOURCES})
+${MAIN_SOURCES}
+${READER_SOURCE})
 
 add_executable(${PROJECT_NAME} ${ALL_SOURCES})
 
