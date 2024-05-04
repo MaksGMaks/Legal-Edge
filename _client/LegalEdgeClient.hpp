@@ -2,6 +2,7 @@
 
 class UiManager;
 class ApiManager;
+class Reader;
 
 class LegalEdgeClient
 {
@@ -15,4 +16,6 @@ private:
     // --- UI ---
     UiManager &m_uiManager;
     ApiManager &m_apiManager;
+
+    Reader *read;
 };

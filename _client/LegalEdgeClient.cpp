@@ -2,6 +2,7 @@
 
 #include <QDebug>
 
+#include "FilesReader/Reader.hpp"
 #include "Ui/UiManager.hpp"
 #include "network/ApiManager.hpp"
 
@@ -9,6 +10,7 @@ LegalEdgeClient::LegalEdgeClient(UiManager &uiManager, ApiManager &apiManager)
     : m_uiManager(uiManager),
       m_apiManager(apiManager)
 {
+    read = new Reader();
 }
 
 LegalEdgeClient::~LegalEdgeClient()
