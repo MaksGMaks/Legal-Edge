@@ -62,3 +62,15 @@ void ApiManager::addNewCustomer(const QString &username, const QString &phone)
         Method::POST,
         dataset);
 }
+
+void ApiManager::addNewNote(const QString &text, const QString &datetime)
+{
+    Dataset dataset;
+    dataset[Keys::Notes::TEXT] = {text};
+    dataset[Keys::Notes::DATE] = {datetime};
+
+    m_networkService->sendRequest(
+        Endpoints::Notes::ADD,
+        Method::POST,
+        dataset);
+}

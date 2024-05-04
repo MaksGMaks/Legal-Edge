@@ -3,7 +3,8 @@
 #include <iostream>
 
 BusinessLogic::BusinessLogic(const std::shared_ptr<RepositoryManager> &repositoryManager) : m_usersModule(std::make_shared<UserModule>(repositoryManager)),
-                                                                                            m_customerModule(std::make_shared<CustomerModule>(repositoryManager))
+                                                                                            m_customerModule(std::make_shared<CustomerModule>(repositoryManager)),
+                                                                                            m_notesModule(std::make_shared<NotesModule>(repositoryManager))
 {
     std::cout << "BusinessLogic::BusinessLogic" << std::endl;
 }
@@ -21,6 +22,10 @@ ResponseData BusinessLogic::executeTask(RequestData requestData)
         if (requestData.module == "customers")
         {
             responseData = m_customerModule->executeTask(requestData);
+        }
+        if (requestData.module == "notes")
+        {
+            responseData = m_notesModule->executeTask(requestData);
         }
     }
     // catch (const ServerException &ex)

@@ -50,10 +50,12 @@ int main(int argc, char *argv[])
     // apiManager.registerUser("admin4", "admin4");
     // qDebug() << "Sdldjsgldfghs";
     // apiManager.loginUser("admin4", "admin4");
-    qDebug() << "attempt no 2";
-    apiManager.addNewCustomer("bro", "0973333");
-    qDebug() << "attempt no 3";
-    apiManager.registerUser("dada", "dawda");
+    // qDebug() << "attempt no 2";
+    // apiManager.addNewCustomer("bro", "0973333");
+    // qDebug() << "attempt no 3";
+    // apiManager.registerUser("dada", "dawda");
+    qDebug() << "notes attempt";
+    apiManager.addNewNote("note 1 hallo shalom!!!", "12.02.2003");
 
     // Client setup
     UiManager uiManager(app);

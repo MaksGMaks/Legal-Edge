@@ -4,5 +4,7 @@ CREATE TABLE users(
     PASSWORD TEXT
 );
 CREATE TABLE clients(username TEXT, phoneNumber TEXT);
+--TABLE FOR ONLY NOTES;
+CREATE TABLE notes(field TEXT, datatime TEXT);
 INSERT INTO users(ID, USERNAME, PASSWORD)
 VALUES (2, 'admin2', 'admin2');
