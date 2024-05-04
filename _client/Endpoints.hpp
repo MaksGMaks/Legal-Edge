@@ -22,6 +22,11 @@ namespace Endpoints
         inline constexpr char USERS_PREFIX[] = "/customer";
         inline constexpr char ADD[] = "/customer/add";
     }
+    namespace Notes
+    {
+        inline constexpr char USERS_PREFIX[] = "/notes";
+        inline constexpr char ADD[] = "/notes/add";
+    }
 }
 
 namespace Keys
@@ -51,5 +56,11 @@ namespace Keys
     {
         inline constexpr char USERNAME[] = "username";
         inline constexpr char PHONE[] = "phone";
+    }
+
+    namespace Notes
+    {
+        inline constexpr char TEXT[] = "text";
+        inline constexpr char DATE[] = "date";
     }
 }

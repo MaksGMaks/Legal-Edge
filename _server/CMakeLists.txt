@@ -8,13 +8,15 @@ find_package(SQLite3 REQUIRED)
 set(BUSINESS
     ${CMAKE_CURRENT_SOURCE_DIR}/Business/UserModule.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Business/BusienessLogic.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/Business/CustomerModule.cpp)
+    ${CMAKE_CURRENT_SOURCE_DIR}/Business/CustomerModule.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Business/NotesModule.cpp)
 
 set(DATABASE
     ${CMAKE_CURRENT_SOURCE_DIR}/Database/DatabaseManager.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Database/RepositoryManager.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Database/UserRepository.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/Database/CustomerRepository.cpp)
+    ${CMAKE_CURRENT_SOURCE_DIR}/Database/CustomerRepository.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Database/NotesRepository.cpp)
 
 
 

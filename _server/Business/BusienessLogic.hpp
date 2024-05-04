@@ -9,6 +9,7 @@
 
 #include "UserModule.hpp"
 #include "CustomerModule.hpp"
+#include "NotesModule.hpp"
 
 class RepositoryManager;
 class UserModule;
@@ -23,4 +24,5 @@ public:
 private:
     std::shared_ptr<UserModule> m_usersModule;
     std::shared_ptr<CustomerModule> m_customerModule;
+    std::shared_ptr<NotesModule> m_notesModule;
 };

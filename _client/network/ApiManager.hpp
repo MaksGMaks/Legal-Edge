@@ -25,6 +25,7 @@ public slots:
     virtual void registerUser(const QString &username, const QString &password);
     virtual void sendPDFfile(const QString &path); // not needed
     virtual void addNewCustomer(const QString &username, const QString &phone);
+    virtual void addNewNote(const QString &text, const QString &datetime);
 
     // protected slots:
     //     void handleResponse(const QString &endpoint, Method &method, const Dataset &dataset);
