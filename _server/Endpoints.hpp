@@ -20,6 +20,9 @@ namespace Endpoints
     {
         inline constexpr char USERS_PREFIX[] = "/notes";
         inline constexpr char ADD[] = "/notes/add";
+        inline constexpr char GET[] = "/notes/get";
+        inline constexpr char DEL[] = "/notes/del";
+        inline constexpr char UPD[] = "/notes/upd";
     }
 }
 
@@ -66,5 +69,11 @@ namespace Database
     {
         DATABASE_CUSTOMER_USERNAME,
         DATABASE_CUSTOMER_PHONE
+    };
+
+    enum Notes : int
+    {
+        DATABASE_NOTES_TEXT,
+        DATABASE_NOTES_DATE
     };
 }

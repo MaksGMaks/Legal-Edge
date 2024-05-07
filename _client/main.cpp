@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
     // qDebug() << "attempt no 3";
     // apiManager.registerUser("dada", "dawda");
     qDebug() << "notes attempt";
-    apiManager.addNewNote("note 1 hallo shalom!!!", "12.02.2003");
+    apiManager.getAllNotes();
 
     // Client setup
     UiManager uiManager(app);
