@@ -37,6 +37,6 @@ ResponseData CustomerModule::getAllCustomers()
     std::cout << "CustomerModule::getAllCustomers" << std::endl;
     ResponseData res;
     auto vec = m_customerManager->getAll();
-    res.dataset[Keys::Customer::USERNAME] = {vec[0][Database::Customer::DATABASE_CUSTOMER_USERNAME]};
+    res.dataset[Keys::Customer::USERNAME] = vec[Database::Customer::DATABASE_CUSTOMER_USERNAME];
     return res;
 }
