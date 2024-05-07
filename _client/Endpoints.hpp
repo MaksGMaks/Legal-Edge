@@ -26,6 +26,9 @@ namespace Endpoints
     {
         inline constexpr char USERS_PREFIX[] = "/notes";
         inline constexpr char ADD[] = "/notes/add";
+        inline constexpr char GET[] = "/notes/get";
+        inline constexpr char DEL[] = "/notes/del";
+        inline constexpr char UPD[] = "/notes/upd";
     }
 }
 

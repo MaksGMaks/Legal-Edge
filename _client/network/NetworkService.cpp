@@ -39,7 +39,7 @@ void NetworkService::sendRequest(QString endpoint, const Method &method, const D
         reply = m_manager->deleteResource(request);
         break;
     default:
-        qDebug() << "wrong in swich-case sengrequest";
+        qDebug() << "wrong in swich-case sendrequest";
         break;
     }
     qDebug() << "if";
@@ -72,7 +72,7 @@ void NetworkService::onNetworkReply(const QString &endpoint, const Method &metho
         qDebug() << "tuta";
         QByteArray data = reply->readAll();
         auto dataset = m_serializer->deserialize(data);
-        qDebug() << dataset[Keys::User::USERNAME];
+        qDebug() << dataset[Keys::Notes::TEXT];
     }
     else
     {

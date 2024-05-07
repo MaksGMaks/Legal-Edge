@@ -16,6 +16,9 @@ private:
 
     sqlite3 *db;
 
+private:
+    std::vector<std::vector<std::string>> processor(std::vector<std::vector<std::string>> arg);
+
 public:
     DatabaseManager(const std::string &path_to_db, const std::string &path_to_sql_script) noexcept;
     ~DatabaseManager();

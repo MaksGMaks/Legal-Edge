@@ -13,6 +13,9 @@ public:
 
 private:
     ResponseData addNewNote(const Dataset &dataset);
+    ResponseData deleteNote(const Dataset &dataset);
+    ResponseData getAllNotes();
+    ResponseData editNotes(const Dataset &dataset);
 
 private:
     std::shared_ptr<IRepository> m_NotesRepository;
