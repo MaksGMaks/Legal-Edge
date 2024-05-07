@@ -30,6 +30,8 @@ set(UI_SOURCES
     ${UI_PATH}/Widgets/SubWidgets/SearchFieldComp.cpp
     ${UI_PATH}/Widgets/SubWidgets/InputAreaComp.cpp
     ${UI_PATH}/Widgets/SubWidgets/CreateCase.cpp
+    ${UI_PATH}/Widgets/SubWidgets/WatchCases.cpp
+    ${UI_PATH}/Widgets/SubWidgets/Notation.cpp
     )
 
 set(BOOKS_SOURCES

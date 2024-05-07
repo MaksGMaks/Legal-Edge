@@ -17,9 +17,8 @@ private:
     // buttons
     QPushButton *m_createCase;
     QPushButton *m_myCases;
-    QPushButton *m_manageDocs;
-    QPushButton *m_addConsultation;
-    QPushButton *m_contacts;
+    // QPushButton *m_addConsultation;
+    // QPushButton *m_contacts;
 
     // layouts
     QVBoxLayout *m_buttonStack;
@@ -43,14 +42,12 @@ public:
 signals:
     void createCase();
     void openMyCases();
-    void manageDocs();
-    void addConsultation();
-    void openContacts();
+    // void addConsultation();
+    // void openContacts();
 
 protected slots:
     void onCreateCaseClicked();
     void onMyCasesClicked();
-    void onManageDocsClicked();
-    void onAddConsultClicked();
-    void onContactsClicked();
+    // void onAddConsultClicked();
+    // void onContactsClicked();
 };

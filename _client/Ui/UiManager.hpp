@@ -16,6 +16,7 @@
 // #include "Widgets/SubWidgets/NewEvent.hpp"
 #include "Widgets/SubWidgets/BooksOfLaws.hpp"
 #include "Widgets/SubWidgets/CreateCase.hpp"
+#include "Widgets/SubWidgets/WatchCases.hpp"
 
 #include "Widgets/SubWidgets/PdfReader.hpp"
 
@@ -53,6 +54,9 @@ protected:
     CaseManagment *m_caseManagment;
     MyCases *m_cm_myCases;
     CreateCase *m_cm_createCase;
+    WatchCases *m_cm_actualCases;
+    WatchCases *m_cm_savedCases;
+    
 
     // Plans
     // Plans *m_plans;
@@ -97,18 +101,17 @@ protected slots:
     // Case Managment main
     void onCreateCaseClicked();
     void onMyCasesClicked(); 
-    // void onManageDocsClicked();
+    // void onManageCasesClicked();
     // void onAddConsultClicked();
     // void onContactsClicked();
 
     // Case Managment MyCases
-    // void onActualCasesClicked();
-    // void onSavedCasesClicked();
-    // void onSavedDocsClicked();
+    void onActualCasesClicked();
+    void onSavedCasesClicked();
     void onMainCasesExitClicked();
 
     // Case Managment CreateCase
-    //void onMyCasesExitClicked();
+    void onMyCasesExitClicked();
 
     // Plans main
     // void onViewEventsClicked();
