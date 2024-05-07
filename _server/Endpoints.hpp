@@ -24,6 +24,11 @@ namespace Endpoints
         inline constexpr char DEL[] = "/notes/del";
         inline constexpr char UPD[] = "/notes/upd";
     }
+    namespace Case
+    {
+        inline constexpr char USERS_PREFIX[] = "/case";
+        inline constexpr char ADD[] = "/case/add";
+    }
 }
 
 namespace Keys
@@ -54,6 +59,12 @@ namespace Keys
         inline constexpr char TEXT[] = "text";
         inline constexpr char DATE[] = "date";
     }
+    namespace Case
+    {
+        inline constexpr char NAME[] = "name";
+        inline constexpr char PATH[] = "path";
+        inline constexpr char STATUS[] = "status";
+    }
 }
 
 namespace Database
@@ -75,5 +86,11 @@ namespace Database
     {
         DATABASE_NOTES_TEXT,
         DATABASE_NOTES_DATE
+    };
+    enum Case : int
+    {
+        DATABASE_CASE_NAME,
+        DATABASE_CASE_PATH,
+        DATABASE_CASE_STATUS
     };
 }

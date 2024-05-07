@@ -22,6 +22,7 @@ std::vector<std::vector<std::string>> NotesRepository::getAll() const
 {
     const std::string query = "SELECT * FROM notes";
     auto res = m_dbManager->executeQuery(query);
+    std::cout << "pase" << std::endl;
     return res;
 }
 std::vector<std::vector<std::string>> NotesRepository::getByField(const std::string &fieldName, const std::string &value) const

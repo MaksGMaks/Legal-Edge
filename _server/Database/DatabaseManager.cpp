@@ -157,6 +157,7 @@ std::vector<std::vector<std::string>> DatabaseManager::executeQuery(const std::s
         std::cerr << "Ошибка при выполнении запроса: " << sqlite3_errmsg(db) << std::endl;
     }
     sqlite3_finalize(stmt);
+    std::cout << "result" << std::endl;
     auto r = processor(result);
     return r;
 }
@@ -164,7 +165,15 @@ std::vector<std::vector<std::string>> DatabaseManager::executeQuery(const std::s
 std::vector<std::vector<std::string>> DatabaseManager::processor(std::vector<std::vector<std::string>> matrix)
 {
     int rows = matrix.size();
+    std::cout << "rows " << rows << std::endl;
+    if (rows == 0)
+    {
+        return matrix;
+    }
     int cols = matrix[0].size();
+
+    std::cout << "rows " << rows << std::endl;
+    std::cout << "cols " << cols << std::endl;
 
     std::vector<std::vector<std::string>> result(cols, std::vector<std::string>(rows));
 
