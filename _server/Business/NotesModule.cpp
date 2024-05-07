@@ -45,8 +45,8 @@ ResponseData NotesModule::getAllNotes()
     std::cout << "NotesModule::getAllNotes" << std::endl;
     ResponseData res;
     auto vec = m_NotesRepository->getAll();
-    res.dataset[Keys::Notes::TEXT] = {vec[0][Database::Notes::DATABASE_NOTES_TEXT]};
-    res.dataset[Keys::Notes::DATE] = {vec[0][Database::Notes::DATABASE_NOTES_DATE]};
+    res.dataset[Keys::Notes::TEXT] = vec[Database::Notes::DATABASE_NOTES_TEXT];
+    res.dataset[Keys::Notes::DATE] = vec[Database::Notes::DATABASE_NOTES_DATE];
     return res;
 }
 
