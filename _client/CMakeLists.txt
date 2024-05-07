@@ -27,7 +27,10 @@ set(UI_SOURCES
     ${UI_PATH}/Widgets/SubWidgets/NewEvent.cpp
     ${UI_PATH}/Widgets/SubWidgets/BooksOfLaws.cpp
     ${UI_PATH}/Widgets/SubWidgets/PdfReader.cpp
-    ${UI_PATH}/Widgets/SubWidgets/SearchFieldComp.cpp)
+    ${UI_PATH}/Widgets/SubWidgets/SearchFieldComp.cpp
+    ${UI_PATH}/Widgets/SubWidgets/InputAreaComp.cpp
+    ${UI_PATH}/Widgets/SubWidgets/CreateCase.cpp
+    )
 
 set(BOOKS_SOURCES
     ${BOOKS_PATH}/administrativeJudiciaryCodex.pdf
