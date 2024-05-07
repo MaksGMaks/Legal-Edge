@@ -8,11 +8,6 @@
 #include "Ui/UiManager.hpp"
 #include "LegalEdgeClient.hpp"
 
-// for test
-#include <QThread>
-#include <thread>
-#include <chrono>
-
 const QString SERVER_API_URL{"http://127.0.0.1:8080/api"};
 
 int main(int argc, char *argv[])
@@ -26,6 +21,7 @@ int main(int argc, char *argv[])
     qDebug() << "notes attempt";
     apiManager.getAllNotes();
 
+    apiManager.createCase("asasas");
     // Client setup
     UiManager uiManager(app);
     LegalEdgeClient client(uiManager, apiManager);

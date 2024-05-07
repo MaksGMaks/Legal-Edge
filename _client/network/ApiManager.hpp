@@ -30,6 +30,9 @@ public slots:
     virtual void editNote(const QString &text, const QString &datetime);
     virtual void getAllNotes();
 
+    // cases
+    virtual void createCase(const QString &name);
+
 protected slots:
     void handleResponse(const QString &endpoint, Method method, const Dataset &dataset);
 

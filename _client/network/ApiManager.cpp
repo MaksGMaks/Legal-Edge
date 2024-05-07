@@ -1,9 +1,19 @@
 #include "ApiManager.hpp"
 #include <fstream>
+#include <QDir>
+
+#define PATH_CASE "../../cases"
 
 ApiManager::ApiManager(NetworkService &networkService) : m_networkService(networkService)
 {
     qDebug() << "ApiManager::ApiManager";
+
+    QDir dir;
+    if (!dir.exists(PATH_CASE))
+    {
+        dir.mkpath(PATH_CASE);
+    }
+
     connect(&m_networkService, &NetworkService::responseReceived,
             this, &ApiManager::handleResponse);
     // connect(m_networkService, &NetworkService::responseReceived,
@@ -33,6 +43,21 @@ void ApiManager::setupHandlers()
 
 void ApiManager::handleResponse(const QString &endpoint, Method method, const Dataset &dataset)
 {
+}
+
+void ApiManager::createCase(const QString &name)
+{
+    qDebug() << "ApiManager::createCase";
+    QString nameDir = name;
+    QString path = QString("%1/%2").arg(PATH_CASE, nameDir);
+    QDir dir;
+    dir.mkpath(path);
+    auto absolute = dir.absolutePath();
+    Dataset dataset;
+    dataset[Keys::Case::NAME] = {name};
+    dataset[Keys::Case::PATH] = {absolute};
+    dataset[Keys::Case::STATUS] = {Keys::Case::Status::inProgress};
+    m_networkService.sendRequest(Endpoints::Case::ADD, Method::POST, dataset);
 }
 
 void ApiManager::loginUser(const QString &username, const QString &password)
@@ -162,6 +187,7 @@ void ApiManager::handleAllNotes(Method method, const Dataset &dataset)
     {
         std::string text = dataset[Keys::Notes::TEXT][i].toStdString();
         std::string date = dataset[Keys::Notes::DATE][i].toStdString();
+        qDebug() << text.c_str() << date.c_str();
 
         note.push_back(std::make_pair<std::string, std::string>(std::move(text), std::move(date)));
     }

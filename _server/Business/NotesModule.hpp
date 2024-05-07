@@ -17,6 +17,12 @@ private:
     ResponseData getAllNotes();
     ResponseData editNotes(const Dataset &dataset);
 
+    ResponseData createCase(const Dataset &dataset);
+    ResponseData editCase(const Dataset &dataset);
+    ResponseData deleteCase(const Dataset &dataset);
+    ResponseData getAllCases();
+
 private:
     std::shared_ptr<IRepository> m_NotesRepository;
+    std::shared_ptr<IRepository> m_CaseRepository;
 };
