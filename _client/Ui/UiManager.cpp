@@ -21,10 +21,14 @@ void UiManager::initWidgets()
     m_caseManagment->connectButtons();
     m_casesWidgets->addWidget(m_caseManagment);
 
-    m_m_myCases = new MyCases();
-    m_m_myCases->init();
-    m_m_myCases->connectButtons();
-    m_casesWidgets->addWidget(m_m_myCases);
+    m_cm_myCases = new MyCases();
+    m_cm_myCases->init();
+    m_cm_myCases->connectButtons();
+    m_casesWidgets->addWidget(m_cm_myCases);
+
+    m_cm_createCase = new CreateCase();
+    m_cm_createCase->init();
+    m_casesWidgets->addWidget(m_cm_createCase);
 
     // Plans
     // m_plansWidgets = new QStackedWidget();
@@ -143,17 +147,19 @@ void UiManager::initBooks()
 
 void UiManager::connectWidgets()
 {
-    qDebug() << "UiManager: connect";
+    qDebug() << "LOG::UiManager::connectButtons -- connect CaseManagment buttons"; 
     connect(m_caseManagment, &CaseManagment::openMyCases, this, &UiManager::onMyCasesClicked);
+    connect(m_caseManagment, &CaseManagment::createCase, this, &UiManager::onCreateCaseClicked);
     // connect(m_plans, &Plans::openAddEvent, this, &UiManager::onAddEventClicked);
     // connect(m_m_addEvent, &AddEvent::createNewEvent, this, &UiManager::onNewEventClicked);
-    connect(m_m_myCases, &MyCases::useExit, this, &UiManager::onMainCasesExitClicked);
+    connect(m_cm_myCases, &MyCases::useExit, this, &UiManager::onMainCasesExitClicked);
+    connect(m_cm_createCase, &CreateCase::emitExit, this, &UiManager::onMainCasesExitClicked);
     // connect(m_m_newEvent, &NewEvent::useExit, this, &UiManager::onPlansAddEventExitClicked);
     // connect(m_m_addEvent, &AddEvent::useExit, this, &UiManager::onMainPlansExitClicked);
 
-    connect(m_helper, &Helper::openBookOfLaws, this, &UiManager::onBookOfLawsClicked);
+    
 
-    qDebug() << "UiManager: before books connect";
+    qDebug() << "LOG::UiManager::connectButtons -- connect books buttons"; 
     connect(m_helper_booksOfLaws, &BooksOfLaws::openAdministrativeJudiciaryCodex, this, &UiManager::onAdministrativeJudiciaryCodexClicked);
     connect(m_helper_booksOfLaws, &BooksOfLaws::openAdministrativeOffensesCodex, this, &UiManager::onAdministrativeOffensesCodexClicked);
     connect(m_helper_booksOfLaws, &BooksOfLaws::openAirCodex, this, &UiManager::onAirCodexClicked);
@@ -178,10 +184,12 @@ void UiManager::connectWidgets()
     connect(m_helper_booksOfLaws, &BooksOfLaws::openSubsoilCodex, this, &UiManager::onSubsoilCodexClicked);
     connect(m_helper_booksOfLaws, &BooksOfLaws::openTaxCodex, this, &UiManager::onTaxCodexClicked);
     connect(m_helper_booksOfLaws, &BooksOfLaws::openWaterCodex, this, &UiManager::onWaterCodexClicked);
-    qDebug() << "UiManager: connect books";
+    
+    qDebug() << "LOG::UiManager::connectButtons -- connect helper buttons"; 
 
     connect(m_helper_booksOfLaws, &BooksOfLaws::emitExit, this, &UiManager::onBookOfLawsExitClicked);
     connect(m_helper_pdfReader, &PdfReader::emitExit, this, &UiManager::onPdfReaderExitClicked);
+    connect(m_helper, &Helper::openBookOfLaws, this, &UiManager::onBookOfLawsClicked);
 }
 
 void UiManager::connectApi()
@@ -219,7 +227,7 @@ UiManager::~UiManager()
 
 void UiManager::onMyCasesClicked()
 {
-    m_casesWidgets->setCurrentWidget(m_m_myCases);
+    m_casesWidgets->setCurrentWidget(m_cm_myCases);
 }
 
 // void UiManager::onAddEventClicked()
@@ -405,3 +413,13 @@ void UiManager::onPdfReaderExitClicked()
 {
     m_helperWidgets->setCurrentWidget(m_helper_booksOfLaws);
 }
+
+void UiManager::onCreateCaseClicked()
+{
+    m_casesWidgets->setCurrentWidget(m_cm_createCase);
+}
+
+// void UiManager::onMyCasesExitClicked()
+// {
+//     m_casesWidgets->setCurrentWidget(m_cm_myCases);
+// }
