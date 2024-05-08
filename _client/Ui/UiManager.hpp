@@ -22,14 +22,14 @@
 
 #include "Widgets/SubWidgets/PdfReader.hpp"
 
-//#include "network/ApiManager.hpp"
+#include "../network/ApiManager.hpp"
 
 class UiManager : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit UiManager(QApplication &app) noexcept; //, ApiManager &api
+    explicit UiManager(QApplication &app, ApiManager &api) noexcept; //, ApiManager &api
     virtual ~UiManager();
 
     void initWidgets();
@@ -39,7 +39,7 @@ public:
     void startUi();
 
 protected:
-    //ApiManager &m_api;
+    ApiManager &m_api;
 
     QApplication &m_app;
     MainWindow *m_mainWindow;

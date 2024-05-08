@@ -1,8 +1,8 @@
 #include "UiManager.hpp"
 
-UiManager::UiManager(QApplication &app) noexcept //, ApiManager &api
-    : m_app(app)
-    //m_api(api)
+UiManager::UiManager(QApplication &app, ApiManager &api) noexcept //, ApiManager &api
+    : m_app(app),
+    m_api(api)
 {
     qDebug() << "UiManager: constructor";
     initBooks();
@@ -176,7 +176,7 @@ void UiManager::connectWidgets()
     connect(m_cm_myCases, &MyCases::openSavedCases, this, &UiManager::onSavedCasesClicked);
     connect(m_cm_savedCases, &SavedCases::emitExit, this, &UiManager::onMyCasesExitClicked);
 
-    //connect(m_cm_createCase, &CreateCase::saveCase, m_api, &ApiManager::createCase);
+    connect(m_cm_createCase, &CreateCase::saveCase, m_api, &ApiManager::createCase);
     // connect(m_plans, &Plans::openAddEvent, this, &UiManager::onAddEventClicked);
     // connect(m_m_addEvent, &AddEvent::createNewEvent, this, &UiManager::onNewEventClicked);
     connect(m_cm_myCases, &MyCases::useExit, this, &UiManager::onMainCasesExitClicked);
