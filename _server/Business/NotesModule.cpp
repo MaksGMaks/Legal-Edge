@@ -19,6 +19,39 @@ ResponseData NotesModule::executeTask(const RequestData &requestData)
     return response;
 }
 
+ResponseData NotesModule::createCase(const Dataset &dataset)
+{
+    std::cout << "NotesModule::createCase" << std::endl;
+    auto text = dataset.at(Keys::Case::NAME).front();
+    auto path = dataset.at(Keys::Case::PATH).front();
+    auto status = dataset.at(Keys::Case::STATUS).front();
+    m_CaseRepository->add({text, path, status});
+    ResponseData res;
+    return res;
+}
+
+ResponseData NotesModule::editCase(const Dataset &dataset)
+{
+    ResponseData res;
+    return res;
+}
+
+ResponseData NotesModule::deleteCase(const Dataset &dataset)
+{
+    ResponseData res;
+    return res;
+}
+
+ResponseData NotesModule::getAllCases()
+{
+    ResponseData res;
+    std::cout << "NotesModule::getAllCases" << std::endl;
+    auto response = m_CaseRepository->getAll();
+    res.dataset[Keys::Case::NAME] = response[Database::Case::DATABASE_CASE_NAME];
+    res.dataset[Keys::Case::PATH] = response[Database::Case::DATABASE_CASE_PATH];
+    res.dataset[Keys::Case::STATUS] = response[Database::Case::DATABASE_CASE_STATUS];
+    return res;
+}
 ResponseData NotesModule::addNewNote(const Dataset &dataset)
 {
     std::cout << "NotesModule::addNewNote" << std::endl;

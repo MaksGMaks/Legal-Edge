@@ -4,6 +4,8 @@
 
 #include "NetworkService.hpp"
 
+#include <QList>
+
 #include "../Endpoints.hpp"
 #include "../dataTypes.hpp"
 
@@ -27,8 +29,12 @@ public slots:
     virtual void addNewCustomer(const QString &username, const QString &phone);
     virtual void addNewNote(const QString &text, const QString &datetime);
 
-    // protected slots:
-    //     void handleResponse(const QString &endpoint, Method &method, const Dataset &dataset);
+    // cases
+    virtual void createCase(const QString &name, const QList<QString> &files);
+    virtual void getAllCases();
+
+protected slots:
+    void handleResponse(const QString &endpoint, Method method, const Dataset &dataset);
 
 signals:
     void loginSuccess(const QString &id, const QString &roleId);

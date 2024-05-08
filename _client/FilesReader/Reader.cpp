@@ -39,3 +39,14 @@ bool Reader::moveToDir(const QString &path)
     }
     return true;
 }
+
+bool Reader::moveToDirByPath(const QString &path, const QString &to_path)
+{
+    QFile sourceFile(path);
+    if (!sourceFile.exists())
+    {
+        return false;
+    }
+    sourceFile.copy(to_path);
+    return true;
+}

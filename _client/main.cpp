@@ -2,6 +2,8 @@
 
 #include <QCoreApplication>
 #include <QApplication>
+#include <QList>
+
 #include "network/ApiManager.hpp"
 #include "network/JsonSerializer.hpp"
 
@@ -56,6 +58,9 @@ int main(int argc, char *argv[])
     // apiManager.registerUser("dada", "dawda");
     qDebug() << "notes attempt";
     apiManager.addNewNote("note 1 hallo shalom!!!", "12.02.2003");
+
+    QList<QString> list = {"C:\\sysprog\\test.txt", "C:\\sysprog\\test2.txt"};
+    apiManager.createCase("newCase", list);
 
     // Client setup
     UiManager uiManager(app);

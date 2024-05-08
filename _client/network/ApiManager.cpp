@@ -1,4 +1,6 @@
 #include "ApiManager.hpp"
+#include "../FilesReader/Reader.hpp"
+
 #include <fstream>
 
 ApiManager::ApiManager(NetworkService &networkService) : m_networkService(&networkService)
@@ -17,6 +19,50 @@ bool fileExists(const QString &filename)
 ApiManager::~ApiManager()
 {
     qDebug() << "ApiManager::~ApiManager";
+}
+
+void ApiManager::setupHandlers()
+{
+    m_responseHandlers[Endpoints::Users::LOGIN] = [this](Method method, const Dataset &dataset)
+    { handleLoginResponse(method, dataset); };
+    // m_responseHandlers[Endpoints::Users::REGISTER] = [this](Method method, const Dataset &dataset)
+    // { handleRegistrationResponse(method, dataset); };
+    // m_responseHandlers[Endpoints::Users::ROLES] = [this](Method method, const Dataset &dataset)
+    // { handleRoles(method, dataset); };
+}
+
+void ApiManager::handleResponse(const QString &endpoint, Method method, const Dataset &dataset)
+{
+    qDebug("ApiManager::handleResponse for endpoint={}", endpoint);
+    auto handler = m_responseHandlers.find(endpoint);
+    handler->second(method, dataset);
+}
+
+void ApiManager::createCase(const QString &name, const QList<QString> &files)
+{
+    Reader reader;
+    qDebug() << "ApiManager::createCase";
+    QString nameDir = name;
+    QString path = QString("%1/%2").arg(PATH_CASE, nameDir);
+    QDir dir;
+    dir.mkpath(path);
+    auto absolute = dir.absolutePath();
+    for (auto file : files)
+    {
+        reader.moveToDirByPath(file, absolute);
+    }
+    Dataset dataset;
+    dataset[Keys::Case::NAME] = {name};
+    dataset[Keys::Case::PATH] = {absolute};
+    dataset[Keys::Case::STATUS] = {Keys::Case::Status::inProgress};
+    m_networkService.sendRequest(Endpoints::Case::ADD, Method::POST, dataset);
+}
+
+void ApiManager::getAllCases()
+{
+    qDebug() << "ApiManager::getAllCases";
+    Dataset dataset;
+    m_networkService.sendRequest(Endpoints::Case::GET, Method::GET, dataset);
 }
 
 void ApiManager::loginUser(const QString &username, const QString &password)
