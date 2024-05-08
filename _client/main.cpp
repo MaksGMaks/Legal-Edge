@@ -21,9 +21,9 @@ int main(int argc, char *argv[])
     qDebug() << "notes attempt";
     apiManager.getAllNotes();
 
-    //apiManager.createCase("asasas");
+    apiManager.createCase("asasas");
     // Client setup
-    UiManager uiManager(app); //, apiManager
+    UiManager uiManager(app);
     LegalEdgeClient client(uiManager, apiManager);
 
     client.start();

@@ -45,7 +45,7 @@ void ApiManager::handleResponse(const QString &endpoint, Method method, const Da
 {
 }
 
-void ApiManager::createCase(const QString &name, const QList<QString>& list)
+void ApiManager::createCase(const QString &name)
 {
     qDebug() << "ApiManager::createCase";
     QString nameDir = name;

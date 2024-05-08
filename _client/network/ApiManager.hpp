@@ -3,8 +3,6 @@
 
 #include "NetworkService.hpp"
 
-#include <QList>
-
 #include "../Endpoints.hpp"
 #include "../dataTypes.hpp"
 
@@ -33,7 +31,7 @@ public slots:
     virtual void getAllNotes();
 
     // cases
-    virtual void createCase(const QString &name, const QList<QString>& list);
+    virtual void createCase(const QString &name);
 
 protected slots:
     void handleResponse(const QString &endpoint, Method method, const Dataset &dataset);

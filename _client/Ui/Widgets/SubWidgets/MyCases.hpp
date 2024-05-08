@@ -18,7 +18,7 @@ private:
     // buttons
     QPushButton *m_actualCases;
     QPushButton *m_savedCases;
-    QPushButton *m_manageCases;
+    QPushButton *m_savedDocs;
     QPushButton *m_exitButton;
 
     // layouts
@@ -43,12 +43,12 @@ public:
 signals:
     void openActualCases();
     void openSavedCases();
-    void manageCases();
+    void openSavedDocs();
     void useExit();
 
 protected slots:
     void onActualCasesClicked();
     void onSavedCasesClicked();
-    void onManageCasesClicked();
+    void onSavedDocsClicked();
     void onExitClicked();
 };

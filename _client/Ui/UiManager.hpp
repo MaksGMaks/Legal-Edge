@@ -16,20 +16,17 @@
 // #include "Widgets/SubWidgets/NewEvent.hpp"
 #include "Widgets/SubWidgets/BooksOfLaws.hpp"
 #include "Widgets/SubWidgets/CreateCase.hpp"
-#include "Widgets/SubWidgets/ActualCases.hpp"
-#include "Widgets/SubWidgets/SavedCases.hpp"
-#include "Widgets/SubWidgets/ManageCases.hpp"
 
 #include "Widgets/SubWidgets/PdfReader.hpp"
 
-//#include "network/ApiManager.hpp"
+
 
 class UiManager : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit UiManager(QApplication &app) noexcept; //, ApiManager &api
+    explicit UiManager(QApplication &app) noexcept;
     virtual ~UiManager();
 
     void initWidgets();
@@ -39,8 +36,6 @@ public:
     void startUi();
 
 protected:
-    //ApiManager &m_api;
-
     QApplication &m_app;
     MainWindow *m_mainWindow;
 
@@ -58,10 +53,6 @@ protected:
     CaseManagment *m_caseManagment;
     MyCases *m_cm_myCases;
     CreateCase *m_cm_createCase;
-    ActualCases *m_cm_actualCases;
-    SavedCases *m_cm_savedCases;
-    ManageCases *m_cm_manageCases;
-    
 
     // Plans
     // Plans *m_plans;
@@ -106,19 +97,18 @@ protected slots:
     // Case Managment main
     void onCreateCaseClicked();
     void onMyCasesClicked(); 
-    void onManageCasesClicked();
+    // void onManageDocsClicked();
     // void onAddConsultClicked();
     // void onContactsClicked();
 
     // Case Managment MyCases
-    void onActualCasesClicked();
-    void onSavedCasesClicked();
+    // void onActualCasesClicked();
+    // void onSavedCasesClicked();
+    // void onSavedDocsClicked();
     void onMainCasesExitClicked();
 
-    void onSaveCaseClicked();
-
     // Case Managment CreateCase
-    void onMyCasesExitClicked();
+    //void onMyCasesExitClicked();
 
     // Plans main
     // void onViewEventsClicked();
