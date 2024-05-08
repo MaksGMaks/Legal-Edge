@@ -8,7 +8,7 @@ namespace Endpoints
         inline constexpr int MODULE = 1;
         inline constexpr int SUBMODULE = 2;
         inline constexpr int RESOURCE_ID = 3;
-    };
+    }
 
     namespace Users
     {
@@ -71,5 +71,16 @@ namespace Keys
     {
         inline constexpr char TEXT[] = "text";
         inline constexpr char DATE[] = "date";
+    }
+    namespace Case
+    {
+        inline constexpr char NAME[] = "name";
+        inline constexpr char PATH[] = "path";
+        inline constexpr char STATUS[] = "status";
+        namespace Status
+        {
+            inline constexpr char inProgress[] = "0";
+            inline constexpr char done[] = "1";
+        }
     }
 }

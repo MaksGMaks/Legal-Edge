@@ -5,11 +5,11 @@
 
 #include <memory>
 
-class NotesRepository : public IRepository
+class CaseRepository : public IRepository
 {
 public:
-    explicit NotesRepository(std::shared_ptr<DatabaseManager> dbManager);
-    ~NotesRepository() override;
+    explicit CaseRepository(std::shared_ptr<DatabaseManager> dbManager);
+    ~CaseRepository() override;
 
     void add(const std::initializer_list<std::string> &lst) override;
     void update(const std::initializer_list<std::string> &lst) override;

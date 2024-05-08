@@ -20,11 +20,27 @@ void NotesRepository::add(const std::initializer_list<std::string> &lst)
 
 std::vector<std::vector<std::string>> NotesRepository::getAll() const
 {
-    std::vector<std::vector<std::string>> res;
+    const std::string query = "SELECT * FROM notes";
+    auto res = m_dbManager->executeQuery(query);
+    std::cout << "pase" << std::endl;
     return res;
 }
 std::vector<std::vector<std::string>> NotesRepository::getByField(const std::string &fieldName, const std::string &value) const
 {
     std::vector<std::vector<std::string>> res;
     return res;
+}
+
+void NotesRepository::update(const std::initializer_list<std::string> &lst)
+{
+    std::cout << "NotesRepository::update" << std::endl;
+    const std::string query = "UPDATE notes SET field = ? WHERE date = ?";
+    auto res = m_dbManager->executeQuery(query, lst);
+}
+
+void NotesRepository::deleteResource(const std::string &datetime)
+{
+    std::cout << "NotesRepository::deleteResource" << std::endl;
+    const std::string query = "DELETE FROM notes WHERE date = ?";
+    auto res = m_dbManager->executeQuery(query, {datetime});
 }

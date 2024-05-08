@@ -16,9 +16,8 @@ set(DATABASE
     ${CMAKE_CURRENT_SOURCE_DIR}/Database/RepositoryManager.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Database/UserRepository.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Database/CustomerRepository.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/Database/NotesRepository.cpp)
-
-
+    ${CMAKE_CURRENT_SOURCE_DIR}/Database/NotesRepository.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Database/CaseRepository.cpp)
 
 set(NETWORKING 
     ${CMAKE_CURRENT_SOURCE_DIR}/network/HttpTransaction.cpp

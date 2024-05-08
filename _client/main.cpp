@@ -10,34 +10,7 @@
 #include "Ui/UiManager.hpp"
 #include "LegalEdgeClient.hpp"
 
-// for test
-#include <QThread>
-#include <thread>
-#include <chrono>
-
 const QString SERVER_API_URL{"http://127.0.0.1:8080/api"};
-
-class MyThread : public QThread
-{
-private:
-    NetworkService *network;
-    ApiManager *api;
-
-public:
-    MyThread()
-    {
-        network = new NetworkService(nullptr);
-        network->setApiUrl(SERVER_API_URL);
-        network->setSerializer(std::make_unique<JsonSerializer>());
-        api = new ApiManager(*network);
-    }
-
-public:
-    void run() override
-    {
-        api->loginUser("admin2", "admin2");
-    }
-};
 
 int main(int argc, char *argv[])
 {
@@ -47,23 +20,18 @@ int main(int argc, char *argv[])
     net.setApiUrl(SERVER_API_URL);
     net.setSerializer(std::make_unique<JsonSerializer>());
     ApiManager apiManager(net);
-    // apiManager.loginUser("admin2", "admin2");
-    // qDebug() << "sleeping";
-    // apiManager.registerUser("admin4", "admin4");
-    // qDebug() << "Sdldjsgldfghs";
-    // apiManager.loginUser("admin4", "admin4");
-    // qDebug() << "attempt no 2";
-    // apiManager.addNewCustomer("bro", "0973333");
-    // qDebug() << "attempt no 3";
-    // apiManager.registerUser("dada", "dawda");
     qDebug() << "notes attempt";
-    apiManager.addNewNote("note 1 hallo shalom!!!", "12.02.2003");
+    apiManager.getAllNotes();
 
+<<<<<<< HEAD
     QList<QString> list = {"C:\\sysprog\\test.txt", "C:\\sysprog\\test2.txt"};
     apiManager.createCase("newCase", list);
 
+=======
+    //apiManager.createCase("asasas");
+>>>>>>> 9cc9c3eb649a8cd73c3d4274df52303888741906
     // Client setup
-    UiManager uiManager(app);
+    UiManager uiManager(app); //, apiManager
     LegalEdgeClient client(uiManager, apiManager);
 
     client.start();

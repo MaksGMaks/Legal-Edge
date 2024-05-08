@@ -34,3 +34,11 @@ void UserRepository::add(const std::initializer_list<std::string> &lst)
     const std::string query = "INSERT INTO Users (id, username, password) VALUES(?,?,?)";
     auto res = m_dbManager->executeQuery(query, lst);
 }
+
+void UserRepository::update(const std::initializer_list<std::string> &lst)
+{
+}
+
+void UserRepository::deleteResource(const std::string &datetime)
+{
+}
