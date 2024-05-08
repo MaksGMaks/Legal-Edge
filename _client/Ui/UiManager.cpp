@@ -28,7 +28,7 @@ void UiManager::initWidgets()
     m_casesWidgets->addWidget(m_cm_myCases);
 
     m_cm_actualCases = new ActualCases();
-    m_cm_actualCases->init(false);
+    m_cm_actualCases->init(true);
     m_casesWidgets->addWidget(m_cm_actualCases);
 
     m_cm_savedCases = new SavedCases();
@@ -43,11 +43,11 @@ void UiManager::initWidgets()
     m_cm_createCase->init();
     m_casesWidgets->addWidget(m_cm_createCase);
 
-    QList<QString> testNames = {"case1", "case2"};
-    QList<QString> testPathes = {"E:/tests/case1", "E:/tests/case2"};
+    // QList<QString> testNames = {"case1", "case2"};
+    // QList<QString> testPathes = {"E:/tests/case1", "E:/tests/case2"};
 
-    m_cm_actualCases->getCases(testNames, testPathes);
-    m_cm_savedCases->getCases(testNames, testPathes);
+    // m_cm_actualCases->getCases(testNames, testPathes);
+    // m_cm_savedCases->getCases(testNames, testPathes);
 
     // Plans
     // m_plansWidgets = new QStackedWidget();
@@ -169,6 +169,14 @@ void UiManager::connectWidgets()
     qDebug() << "LOG::UiManager::connectButtons -- connect CaseManagment buttons"; 
     connect(m_caseManagment, &CaseManagment::openMyCases, this, &UiManager::onMyCasesClicked);
     connect(m_caseManagment, &CaseManagment::createCase, this, &UiManager::onCreateCaseClicked);
+
+    connect(m_cm_myCases, &MyCases::openActualCases, this, &UiManager::onActualCasesClicked);
+    connect(m_cm_actualCases, &ActualCases::emitExit, this, &UiManager::onMyCasesExitClicked);
+
+    connect(m_cm_myCases, &MyCases::openSavedCases, this, &UiManager::onSavedCasesClicked);
+    connect(m_cm_savedCases, &SavedCases::emitExit, this, &UiManager::onMyCasesExitClicked);
+
+    //connect(m_cm_createCase, &CreateCase::saveCase, m_api, &ApiManager::createCase);
     // connect(m_plans, &Plans::openAddEvent, this, &UiManager::onAddEventClicked);
     // connect(m_m_addEvent, &AddEvent::createNewEvent, this, &UiManager::onNewEventClicked);
     connect(m_cm_myCases, &MyCases::useExit, this, &UiManager::onMainCasesExitClicked);
@@ -441,7 +449,27 @@ void UiManager::onCreateCaseClicked()
     m_casesWidgets->setCurrentWidget(m_cm_createCase);
 }
 
-// void UiManager::onMyCasesExitClicked()
-// {
-//     m_casesWidgets->setCurrentWidget(m_cm_myCases);
-// }
+void UiManager::onMyCasesExitClicked()
+{
+    m_casesWidgets->setCurrentWidget(m_cm_myCases);
+}
+
+void UiManager::onActualCasesClicked()
+{
+    m_casesWidgets->setCurrentWidget(m_cm_actualCases);
+}
+
+void UiManager::onSavedCasesClicked()
+{
+    m_casesWidgets->setCurrentWidget(m_cm_savedCases);
+}
+
+void UiManager::onManageCasesClicked()
+{
+    m_casesWidgets->setCurrentWidget(m_cm_manageCases);
+}
+
+void UiManager::onSaveCaseClicked()
+{
+
+}
