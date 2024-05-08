@@ -6,7 +6,13 @@ InputAreaComp::InputAreaComp(QListWidget *parent) : QListWidget(parent)
     setDragEnabled(false);
     setDragDropMode(QAbstractItemView::DropOnly);
     connect(this, &QListWidget::itemDoubleClicked, this, &InputAreaComp::handleItemDoubleClicked);
-
+    setStyleSheet("QListWiget { "
+                  "background-color: #bbbbbb; "
+                  "color: #000; "
+                  "border: 2px solid #737373; "
+                  "border-radius: 15%; "
+                  "padding: 10px; "
+                  "font-size: 18px; }");
 }
 
 InputAreaComp::~InputAreaComp()
@@ -22,17 +28,17 @@ void InputAreaComp::dragEnterEvent(QDragEnterEvent *event)
 void InputAreaComp::dropEvent(QDropEvent *event)
 {
     qDebug() << "DEBUG: TEST FILE DROP: get in dropEvent";
-    if(event->source() == this) return;
+    if (event->source() == this)
+        return;
 
-    
     qDebug() << "DEBUG: TEST FILE DROP: get in dropEvent and get source" << event->mimeData()->urls();
     QList<QUrl> m_items = event->mimeData()->urls();
-    
-    for(auto element : m_items)
+
+    for (auto element : m_items)
     {
         QString fileName = QFileInfo(element.toLocalFile()).fileName();
-        
-        if(this->findItems(fileName, Qt::MatchExactly).empty())
+
+        if (this->findItems(fileName, Qt::MatchExactly).empty())
         {
             droppedFiles.append(element);
             this->addItem(fileName);
@@ -42,7 +48,6 @@ void InputAreaComp::dropEvent(QDropEvent *event)
             this->showErrorDialog();
         }
     }
-    
 }
 
 void InputAreaComp::dragMoveEvent(QDragMoveEvent *event)
@@ -76,12 +81,12 @@ void InputAreaComp::handleItemDoubleClicked(QListWidgetItem *item)
     messageBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
 
     int result = messageBox.exec();
-    if (result == QMessageBox::Ok) 
+    if (result == QMessageBox::Ok)
     {
         this->removeItemWidget(item);
-        for(auto element : droppedFiles)
+        for (auto element : droppedFiles)
         {
-            if(QFileInfo(element.toLocalFile()).fileName() == item->text())
+            if (QFileInfo(element.toLocalFile()).fileName() == item->text())
             {
                 droppedFiles.removeOne(element);
             }
@@ -99,7 +104,7 @@ void InputAreaComp::clearAll()
 QList<QString> InputAreaComp::giveList()
 {
     QList<QString> list;
-    for(auto element : droppedFiles)
+    for (auto element : droppedFiles)
         list.append(element.toString());
 
     return list;

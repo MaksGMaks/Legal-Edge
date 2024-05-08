@@ -1,0 +1,60 @@
+QMainWindow {
+    background-image: url("C:/LegalEdge/_client/style/background.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+QPushButton {
+    background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #D9D9D9, stop: 1 #737373);
+    border-radius: 15%;
+    font-weight: 400;
+    font-size: 22px;
+    text-align: center;
+    color: #000;
+    padding: 10px;
+    max-width: 350%;
+}
+
+QPushButton:hover {
+    border: 2px solid #737373;
+    background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #737373, stop: 1 #D9D9D9);
+}
+
+QLabel {
+    color: black;
+    font-size: 20px;
+    background: transparent;
+}
+
+QTabWidget::pane {
+    border: 0;
+}
+
+QTabWidget::tab-bar {
+    alignment: center;
+}
+
+
+QTabBar::tab {
+    background: #737373;
+    color: #ffffff;
+    padding: 11px;
+    border: 2px solid #ffffff;
+    border-radius: 10px;
+    margin: 10%;
+    min-width: 100px;
+}
+
+QTabBar::tab:selected {
+    background: #D9D9D9;
+    color: #000000;
+}
+
+QLineEdit {
+    background-color: #bbbbbb;
+    color: #000;
+    border: 2px solid #737373;
+    border-radius: 15%;
+    padding: 5px;
+    font-size: 18px;
+}

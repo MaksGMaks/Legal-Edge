@@ -20,12 +20,12 @@ void CaseManagment::init()
     // m_contacts->resize(Button::WIDTH, Button::HEIGHT);
 
     m_createCase = new QPushButton(tr("Create Case"));
-    m_createCase->setMaximumSize(Button::WIDTH, Button::HEIGHT);
-    m_createCase->resize(Button::WIDTH, Button::HEIGHT);
+    // m_createCase->setMaximumSize(Button::WIDTH, Button::HEIGHT);
+    // m_createCase->resize(Button::WIDTH, Button::HEIGHT);
 
     m_myCases = new QPushButton(tr("My Cases"));
-    m_myCases->setMaximumSize(Button::WIDTH, Button::HEIGHT);
-    m_myCases->resize(Button::WIDTH, Button::HEIGHT);
+    // m_myCases->setMaximumSize(Button::WIDTH, Button::HEIGHT);
+    // m_myCases->resize(Button::WIDTH, Button::HEIGHT);
 
     // init spacers
     m_upButtonV = new QSpacerItem(20, 140, QSizePolicy::Minimum, QSizePolicy::Maximum);

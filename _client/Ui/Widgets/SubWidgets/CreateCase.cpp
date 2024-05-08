@@ -2,12 +2,10 @@
 
 CreateCase::CreateCase(QWidget *parent) : QWidget(parent)
 {
-
 }
 
 CreateCase::~CreateCase()
 {
-
 }
 
 void CreateCase::init()
@@ -17,7 +15,6 @@ void CreateCase::init()
     m_nameLabel = new QLabel("Name of the case");
     m_dowloadDocument = new QLabel("Put documents here/Double click to delete");
     m_inputArea = new InputAreaComp();
-
     m_exitButton = new QPushButton("Exit");
 
     m_rightSpace = new QSpacerItem(400, 100, QSizePolicy::Preferred, QSizePolicy::Minimum);
@@ -47,7 +44,7 @@ void CreateCase::onSaveClicked()
 
 void CreateCase::onExitButtonClicked()
 {
-    if(!m_title->text().isEmpty() || m_inputArea->count() != 0)
+    if (!m_title->text().isEmpty() || m_inputArea->count() != 0)
     {
         QMessageBox messageBox;
         messageBox.setWindowTitle("Warning");
@@ -57,16 +54,13 @@ void CreateCase::onExitButtonClicked()
         messageBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
 
         int result = messageBox.exec();
-        if (result == QMessageBox::Ok) 
+        if (result == QMessageBox::Ok)
         {
             m_inputArea->clearAll();
             m_title->setText("");
-            emit emitExit();    
+            emit emitExit();
         }
     }
     else
-        emit emitExit(); 
-    
-    
+        emit emitExit();
 }
-

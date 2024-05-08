@@ -23,13 +23,20 @@ int main(int argc, char *argv[])
     qDebug() << "notes attempt";
     apiManager.getAllNotes();
 
-<<<<<<< HEAD
     QList<QString> list = {"C:\\sysprog\\test.txt", "C:\\sysprog\\test2.txt"};
     apiManager.createCase("newCase", list);
 
-=======
-    //apiManager.createCase("asasas");
->>>>>>> 9cc9c3eb649a8cd73c3d4274df52303888741906
+    QFile styleFile("C:\\LegalEdge\\_client\\style\\style.css");
+    if (styleFile.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        QString styleSheet = QLatin1String(styleFile.readAll());
+
+        app.setStyleSheet(styleSheet);
+    }
+    else
+    {
+        qDebug() << "Помилка: Неможливо завантажити CSS файл.";
+    }
     // Client setup
     UiManager uiManager(app); //, apiManager
     LegalEdgeClient client(uiManager, apiManager);

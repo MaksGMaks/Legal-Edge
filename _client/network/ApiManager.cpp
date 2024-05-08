@@ -47,7 +47,7 @@ void ApiManager::handleResponse(const QString &endpoint, Method method, const Da
 {
     qDebug("ApiManager::handleResponse for endpoint={}", endpoint);
     auto handler = m_responseHandlers.find(endpoint);
-    handler->second(method, dataset);
+    // handler->second(method, dataset);
 }
 
 void ApiManager::createCase(const QString &name, const QList<QString> &files)
