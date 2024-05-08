@@ -95,3 +95,12 @@ void InputAreaComp::clearAll()
     this->clear();
     droppedFiles.clear();
 }
+
+QList<QString> InputAreaComp::giveList()
+{
+    QList<QString> list;
+    for(auto element : droppedFiles)
+        list.append(element.toString());
+
+    return list;
+}

@@ -1,20 +1,20 @@
-#include "WatchCases.hpp"
+#include "ActualCases.hpp"
 
-WatchCases::WatchCases(QWidget *parent) : QWidget(parent)
+ActualCases::ActualCases(QWidget *parent) : QWidget(parent)
 {
 
 }
 
-WatchCases::~WatchCases()
+ActualCases::~ActualCases()
 {
 
 }
 
-void WatchCases::init(const bool readOnly)
+void ActualCases::init(const bool readOnly)
 {
     m_cases = new QComboBox();
     m_exitButton = new QPushButton("Exit");
-    m_view = new FileViewer();
+    m_view = new FileEditor();
     m_caseDir = new QFileSystemModel();
     m_caseDir->setReadOnly(readOnly);
 
@@ -26,19 +26,19 @@ void WatchCases::init(const bool readOnly)
 
     setLayout(m_mainLayout);
 
-    connect(m_exitButton, &QPushButton::clicked, this, &WatchCases::onExitButtonClicked);
-    connect(m_cases, &QComboBox::currentIndexChanged, this, &WatchCases::currentCaseChanged);
-    connect(m_view, &FileViewer::itemClicked, this, &WatchCases::fileClicked);
-    connect(m_view, &FileViewer::itemsDropped, this, &WatchCases::catchItems);
+    connect(m_exitButton, &QPushButton::clicked, this, &ActualCases::onExitButtonClicked);
+    connect(m_cases, &QComboBox::currentIndexChanged, this, &ActualCases::currentCaseChanged);
+    connect(m_view, &FileEditor::itemClicked, this, &ActualCases::fileClicked);
+    connect(m_view, &FileEditor::itemsDropped, this, &ActualCases::catchItems);
 }
 
-void WatchCases::openCase(const QString pathToCase)
+void ActualCases::openCase(const QString pathToCase)
 {
     m_caseDir->setRootPath(pathToCase);
     m_view->setModel(m_caseDir);
 }
 
-void WatchCases::getCases(const QList<QString> casesName, const QList<QString> casesPath)
+void ActualCases::getCases(const QList<QString> casesName, const QList<QString> casesPath)
 {
     m_allCases = casesName;
     m_allCasesPath = casesPath;
@@ -49,12 +49,12 @@ void WatchCases::getCases(const QList<QString> casesName, const QList<QString> c
     }
 }
 
-void WatchCases::onExitButtonClicked()
+void ActualCases::onExitButtonClicked()
 {
     emit emitExit();
 }
 
-void WatchCases::currentCaseChanged(int index)
+void ActualCases::currentCaseChanged(int index)
 {
     QFileSystemModel* buff = new QFileSystemModel();
     for(auto element : m_allCasesPath)
@@ -77,7 +77,7 @@ void WatchCases::currentCaseChanged(int index)
 
 }
 
-void WatchCases::fileClicked(const QModelIndex &index, QMouseEvent *event)
+void ActualCases::fileClicked(const QModelIndex &index, QMouseEvent *event)
 {
     if (event->button() == Qt::RightButton) {
         QMenu menu;
@@ -103,7 +103,7 @@ void WatchCases::fileClicked(const QModelIndex &index, QMouseEvent *event)
 }
 
 
-void WatchCases::openFileTriggered(const QModelIndex &index)
+void ActualCases::openFileTriggered(const QModelIndex &index)
 {
     qDebug() << "Index in openFile " << index;
     if (!index.isValid()) // Перевірка на дійсність індексу
@@ -118,7 +118,7 @@ void WatchCases::openFileTriggered(const QModelIndex &index)
     QDesktopServices::openUrl(QUrl::fromLocalFile(filePath)); // Відкрити файл
 }   
 
-void WatchCases::deleteFileTriggered(const QModelIndex &index)
+void ActualCases::deleteFileTriggered(const QModelIndex &index)
 {
     qDebug() << "Index in deleteFile " << index;
     
@@ -145,7 +145,7 @@ void WatchCases::deleteFileTriggered(const QModelIndex &index)
     }
 }
 
-void WatchCases::renameFileTriggered(const QModelIndex &index)
+void ActualCases::renameFileTriggered(const QModelIndex &index)
 {
     qDebug() << "Index in renameFile " << index;
 
@@ -174,7 +174,7 @@ void WatchCases::renameFileTriggered(const QModelIndex &index)
     }
 }
 
-void WatchCases::catchItems(QList<QString> list)
+void ActualCases::catchItems(QList<QString> list)
 {
     qDebug() << "Before";
     for(auto element : m_allCasesPath)
@@ -188,19 +188,19 @@ void WatchCases::catchItems(QList<QString> list)
 }
 
 
-FileViewer::FileViewer(QWidget *parent) : QTreeView(parent) 
+FileEditor::FileEditor(QWidget *parent) : QTreeView(parent) 
 {
     setAcceptDrops(true);
     setDragEnabled(false);
     setDragDropMode(QAbstractItemView::DropOnly);
 }
 
-FileViewer::~FileViewer()
+FileEditor::~FileEditor()
 {
 
 }
 
-void FileViewer::mousePressEvent(QMouseEvent *event) 
+void FileEditor::mousePressEvent(QMouseEvent *event) 
 {
     QModelIndex index = indexAt(event->pos());
     if (index.isValid()) 
@@ -211,13 +211,13 @@ void FileViewer::mousePressEvent(QMouseEvent *event)
 }
 
 
-void FileViewer::dragEnterEvent(QDragEnterEvent *event)
+void FileEditor::dragEnterEvent(QDragEnterEvent *event)
 {
     event->accept();
     event->acceptProposedAction();
 }
 
-void FileViewer::dropEvent(QDropEvent *event)
+void FileEditor::dropEvent(QDropEvent *event)
 {
     qDebug() << "DEBUG: TEST FILE DROP: get in dropEvent";
     if(event->source() == this) return;
@@ -249,18 +249,18 @@ void FileViewer::dropEvent(QDropEvent *event)
     
 }
 
-void FileViewer::dragMoveEvent(QDragMoveEvent *event)
+void FileEditor::dragMoveEvent(QDragMoveEvent *event)
 {
     event->accept();
     event->acceptProposedAction();
 }
 
-void FileViewer::dragLeaveEvent(QDragLeaveEvent *event)
+void FileEditor::dragLeaveEvent(QDragLeaveEvent *event)
 {
     event->accept();
 }
 
-void FileViewer::showErrorDialog()
+void FileEditor::showErrorDialog()
 {
     QMessageBox messageBox;
     messageBox.setIcon(QMessageBox::Warning);
@@ -270,12 +270,12 @@ void FileViewer::showErrorDialog()
     messageBox.exec();
 }
 
-void FileViewer::getList(QList<QString> &list)
+void FileEditor::getList(QList<QString> &list)
 {
     m_list = list;
 }
 
-QList<QString> FileViewer::giveList()
+QList<QString> FileEditor::giveList()
 {
     return m_list;
 }

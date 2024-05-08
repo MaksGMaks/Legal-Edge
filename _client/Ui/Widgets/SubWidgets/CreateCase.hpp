@@ -37,7 +37,7 @@ public:
     void init();
 
 signals:
-    void saveCase();
+    void saveCase(const QString &name, const QList<QString> &files);
     void emitExit();
 
 protected slots:

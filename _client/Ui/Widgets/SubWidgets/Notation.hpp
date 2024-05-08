@@ -16,7 +16,11 @@ class Notation : public QWidget
     Q_OBJECT
 
 private:
+
     QComboBox *m_cases;
+
+    QPushButton *m_exitButton;
+
 public:
 
     Notation(QWidget *parent = nullptr);

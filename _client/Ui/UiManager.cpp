@@ -1,7 +1,8 @@
 #include "UiManager.hpp"
 
-UiManager::UiManager(QApplication &app) noexcept
+UiManager::UiManager(QApplication &app) noexcept //, ApiManager &api
     : m_app(app)
+    //m_api(api)
 {
     qDebug() << "UiManager: constructor";
     initBooks();
@@ -26,13 +27,17 @@ void UiManager::initWidgets()
     m_cm_myCases->connectButtons();
     m_casesWidgets->addWidget(m_cm_myCases);
 
-    m_cm_actualCases = new WatchCases();
+    m_cm_actualCases = new ActualCases();
     m_cm_actualCases->init(false);
     m_casesWidgets->addWidget(m_cm_actualCases);
 
-    m_cm_savedCases = new WatchCases();
+    m_cm_savedCases = new SavedCases();
     m_cm_savedCases->init(true);
     m_casesWidgets->addWidget(m_cm_savedCases);
+
+    m_cm_manageCases = new ManageCases();
+    m_cm_manageCases->init();
+    m_casesWidgets->addWidget(m_cm_manageCases);
 
     m_cm_createCase = new CreateCase();
     m_cm_createCase->init();
@@ -42,6 +47,7 @@ void UiManager::initWidgets()
     QList<QString> testPathes = {"E:/tests/case1", "E:/tests/case2"};
 
     m_cm_actualCases->getCases(testNames, testPathes);
+    m_cm_savedCases->getCases(testNames, testPathes);
 
     // Plans
     // m_plansWidgets = new QStackedWidget();
@@ -165,14 +171,19 @@ void UiManager::connectWidgets()
     connect(m_caseManagment, &CaseManagment::createCase, this, &UiManager::onCreateCaseClicked);
 
     connect(m_cm_myCases, &MyCases::openActualCases, this, &UiManager::onActualCasesClicked);
-    connect(m_cm_actualCases, &WatchCases::emitExit, this, &UiManager::onMyCasesExitClicked);
+    connect(m_cm_actualCases, &ActualCases::emitExit, this, &UiManager::onMyCasesExitClicked);
 
     connect(m_cm_myCases, &MyCases::openSavedCases, this, &UiManager::onSavedCasesClicked);
-    connect(m_cm_savedCases, &WatchCases::emitExit, this, &UiManager::onMyCasesExitClicked);
+    connect(m_cm_savedCases, &SavedCases::emitExit, this, &UiManager::onMyCasesExitClicked);
+
+    //connect(m_cm_createCase, &CreateCase::saveCase, m_api, &ApiManager::createCase);
     // connect(m_plans, &Plans::openAddEvent, this, &UiManager::onAddEventClicked);
     // connect(m_m_addEvent, &AddEvent::createNewEvent, this, &UiManager::onNewEventClicked);
     connect(m_cm_myCases, &MyCases::useExit, this, &UiManager::onMainCasesExitClicked);
     connect(m_cm_createCase, &CreateCase::emitExit, this, &UiManager::onMainCasesExitClicked);
+
+    connect(m_cm_myCases, &MyCases::manageCases, this, &UiManager::onManageCasesClicked);
+    connect(m_cm_manageCases, &ManageCases::emitExit, this, &UiManager::onMyCasesExitClicked);
     // connect(m_m_newEvent, &NewEvent::useExit, this, &UiManager::onPlansAddEventExitClicked);
     // connect(m_m_addEvent, &AddEvent::useExit, this, &UiManager::onMainPlansExitClicked);
 
@@ -451,4 +462,14 @@ void UiManager::onActualCasesClicked()
 void UiManager::onSavedCasesClicked()
 {
     m_casesWidgets->setCurrentWidget(m_cm_savedCases);
+}
+
+void UiManager::onManageCasesClicked()
+{
+    m_casesWidgets->setCurrentWidget(m_cm_manageCases);
+}
+
+void UiManager::onSaveCaseClicked()
+{
+
 }

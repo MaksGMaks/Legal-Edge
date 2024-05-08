@@ -42,7 +42,7 @@ void CreateCase::init()
 
 void CreateCase::onSaveClicked()
 {
-    emit saveCase();
+    emit saveCase(m_title->text(), m_inputArea->giveList());
 }
 
 void CreateCase::onExitButtonClicked()
@@ -69,3 +69,4 @@ void CreateCase::onExitButtonClicked()
     
     
 }
+

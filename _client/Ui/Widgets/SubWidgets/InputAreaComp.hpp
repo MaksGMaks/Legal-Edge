@@ -28,8 +28,9 @@ private:
 public:
     InputAreaComp(QListWidget *parent = nullptr);
     ~InputAreaComp();
-
+    
     void clearAll();
+    QList<QString> giveList();
 
 protected:
     void dragEnterEvent(QDragEnterEvent *event) override;

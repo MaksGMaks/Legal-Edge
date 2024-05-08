@@ -25,7 +25,7 @@
 #include <QFileInfo>
 #include <QMimeData>
 
-class FileViewer : public QTreeView 
+class FileEditor : public QTreeView 
 {
     Q_OBJECT
 signals:
@@ -33,8 +33,8 @@ signals:
     void itemsDropped(QList<QString> list);
 
 public:
-    FileViewer(QWidget *parent = nullptr);
-    ~FileViewer();
+    FileEditor(QWidget *parent = nullptr);
+    ~FileEditor();
 
     void getList(QList<QString> &list);
     QList<QString> giveList();
@@ -51,7 +51,7 @@ protected:
     void showErrorDialog();  
 };
 
-class WatchCases : public QWidget
+class ActualCases : public QWidget
 {
     Q_OBJECT
 
@@ -59,7 +59,7 @@ private:
 
     QComboBox *m_cases;
     QPushButton *m_exitButton;
-    FileViewer *m_view;
+    FileEditor *m_view;
     QFileSystemModel *m_caseDir;
 
     QList<QString> m_allCases;
@@ -72,8 +72,8 @@ private:
 
 public: 
     
-    WatchCases(QWidget *parent = nullptr);
-    ~WatchCases();
+    ActualCases(QWidget *parent = nullptr);
+    ~ActualCases();
 
     void init(const bool readOnly);
     void getCases(const QList<QString> casesName, const QList<QString> casesPath);
